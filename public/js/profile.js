@@ -117,24 +117,21 @@ window.addSocialLinkRow = function(defaultUrl = '') {
 
     const row = document.createElement('div');
     row.className = 'social-link-item';
-    row.style = 'display: flex; align-items: center; gap: 0.65rem; background: #f8fafc; padding: 0.6rem 0.85rem; border-radius: 8px; border: 1px solid #e2e8f0; margin-bottom: 0.65rem; transition: all 0.2s ease;';
+    row.style = 'display: flex; align-items: center; gap: 0.5rem; background: var(--bg-subtle, #f8fafc); padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid var(--border-card, #e2e8f0); transition: all 0.2s ease;';
 
     const domain = window.extractDomain(defaultUrl) || '';
     const hasDomain = Boolean(domain && domain.includes('.'));
     const favDomain = hasDomain ? domain : 'example.com';
 
     row.innerHTML = `
-        <div class="social-tab-icon-box" style="width: 38px; height: 38px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 1px 2px rgba(0,0,0,0.05); padding: 5px;">
-            <img class="social-tab-favicon-img" src="https://www.google.com/s2/favicons?domain=${favDomain}&sz=64" alt="Tab Icon" style="width: 20px; height: 20px; object-fit: contain;" onerror="this.src='https://www.google.com/s2/favicons?domain=example.com&sz=64'">
+        <div class="social-tab-icon-box" style="width: 32px; height: 32px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 4px;">
+            <img class="social-tab-favicon-img" src="https://www.google.com/s2/favicons?domain=${favDomain}&sz=64" alt="Tab Icon" style="width: 18px; height: 18px; object-fit: contain;" onerror="this.src='https://www.google.com/s2/favicons?domain=example.com&sz=64'">
         </div>
         <div style="flex: 1; min-width: 0;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
-                <span class="social-domain-badge" style="font-size: 0.72rem; font-weight: 700; color: var(--executive-blue); background: var(--executive-blue-light); padding: 0.1rem 0.45rem; border-radius: 4px; ${hasDomain ? '' : 'display: none;'}">${hasDomain ? domain : ''}</span>
-            </div>
-            <input type="url" name="social_links[]" value="${defaultUrl}" placeholder="Dán bất kỳ link nào (Facebook, TikTok, GitHub, Zalo, Báo chí, Website...)" style="width: 100%; padding: 0.45rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.84rem; outline: none; background: #ffffff;" oninput="updateSocialFavicon(this)">
+            <input type="url" name="social_links[]" form="profileUpdateForm" value="${defaultUrl}" placeholder="https://..." style="width: 100%; padding: 0.4rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; outline: none; background: #ffffff;" oninput="updateSocialFavicon(this)">
         </div>
-        <button type="button" onclick="this.closest('.social-link-item').remove()" style="background: #ffffff; border: 1px solid #fecaca; color: #dc2626; border-radius: 6px; width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" title="Xóa liên kết này">
-            <i class="fa-solid fa-trash-can" style="font-size: 0.85rem;"></i>
+        <button type="button" onclick="this.closest('.social-link-item').remove()" style="background: #ffffff; border: 1px solid #fecaca; color: #dc2626; border-radius: 6px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" title="Xóa">
+            <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
         </button>
     `;
 
@@ -157,6 +154,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const formData = new FormData(profileForm);
+
+            // Bổ sung đầy đủ các liên kết mạng xã hội nằm ở cột widget-card bên trái
+            formData.delete('social_links[]');
+            document.querySelectorAll('input[name="social_links[]"]').forEach(inp => {
+                const val = (inp.value || '').trim();
+                if (val) {
+                    formData.append('social_links[]', val);
+                }
+            });
 
             fetch(profileForm.action, {
                 method: 'POST',

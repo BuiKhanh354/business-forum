@@ -30,7 +30,7 @@
                 <li class="sidebar-nav-item">
                     <a href="{{ route('home') }}">
                         <span class="nav-dot"></span>
-                        <span>Xem Blog</span>
+                        <span>Xem trang chủ</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item {{ request()->routeIs('admin.posts') ? 'active' : '' }}">
@@ -101,7 +101,7 @@
                 <li class="sidebar-nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
                     <a href="{{ route('home') }}">
                         <span class="nav-dot"></span>
-                        <span>Blog</span>
+                        <span>Trang chủ</span>
                     </a>
                 </li>
 
