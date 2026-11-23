@@ -116,6 +116,48 @@ function closeProposalModal() {
   }
 }
 
+// Hàm mở popup Xác nhận Xóa đề xuất
+window.openDeleteProposalModal = function(btn) {
+  if (!btn) return;
+  const deleteUrl = btn.getAttribute('data-delete-url');
+  const sender = btn.getAttribute('data-sender');
+  const company = btn.getAttribute('data-company');
+  const subject = btn.getAttribute('data-subject');
+  const purpose = btn.getAttribute('data-purpose');
+
+  const form = document.getElementById('deleteProposalForm');
+  const senderTarget = document.getElementById('deleteProposalSenderTarget');
+  const subjectTarget = document.getElementById('deleteProposalSubjectTarget');
+  const metaTarget = document.getElementById('deleteProposalMetaTarget');
+  const modal = document.getElementById('deleteProposalModal');
+
+  if (form) form.action = deleteUrl;
+  if (senderTarget) senderTarget.textContent = sender + (company ? ' (' + company + ')' : '');
+  if (subjectTarget) subjectTarget.textContent = subject || 'Thư ngỏ đề xuất';
+  if (metaTarget) {
+    metaTarget.innerHTML = `
+      <span style="background: #e0e7ff; color: #4338ca; padding: 2px 7px; border-radius: 4px; font-weight: 700;">${purpose || 'Đề xuất'}</span>
+      <span>${sender}</span>
+    `;
+  }
+
+  if (modal) {
+    modal.classList.add('show', 'active');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+// Hàm đóng popup Xác nhận Xóa đề xuất
+window.closeDeleteProposalModal = function() {
+  const modal = document.getElementById('deleteProposalModal');
+  if (modal) {
+    modal.classList.remove('show', 'active');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+};
+
 // Đóng modal khi click ra ngoài vùng backdrop & xử lý lưu ghi chú qua AJAX
 document.addEventListener('DOMContentLoaded', function () {
   const modal = document.getElementById('proposalDetailModal');
@@ -126,6 +168,23 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  const delModal = document.getElementById('deleteProposalModal');
+  if (delModal) {
+    delModal.addEventListener('click', function (e) {
+      if (e.target === delModal) {
+        closeDeleteProposalModal();
+      }
+    });
+  }
+
+  // Đóng modal khi bấm ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeProposalModal();
+      closeDeleteProposalModal();
+    }
+  });
 
   // Bắt sự kiện lưu ghi chú đề xuất bằng AJAX (Không reload trang)
   const notesForm = document.getElementById('modalAdminNotesForm');

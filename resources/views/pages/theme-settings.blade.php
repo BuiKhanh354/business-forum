@@ -374,9 +374,6 @@
                     <div style="margin-bottom: 1.5rem;">
                         <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
                             <span>Xem trước ảnh bìa Máy tính:</span>
-                            <span id="coverCurrentHeightText" style="font-size: 0.78rem; color: var(--executive-blue); font-weight: 700; background: var(--executive-blue-light); padding: 0.2rem 0.6rem; border-radius: 4px;">
-                                Chiều cao: {{ $settings['cover_height_desktop'] ?? '350px' }}
-                            </span>
                         </div>
                         <div id="themeCoverPreviewBox" style="min-height: {{ $settings['cover_height_desktop'] ?? '350px' }}; height: {{ $settings['cover_height_desktop'] ?? '350px' }}; border-radius: 6px; position: relative; background: url('{{ asset($settings['cover_desktop'] ?? 'assets/images/cover-banner.jpg') }}'); background-size: cover; background-position: center; border: 2px solid rgba(37, 99, 235, 0.3); box-shadow: 0 4px 15px rgba(0,0,0,0.12); overflow: hidden; transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);">
                         </div>
@@ -433,13 +430,13 @@
                         <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;" id="coverHeightBtnGroup">
                             @php $hDesk = $settings['cover_height_desktop'] ?? '350px'; @endphp
                             <button type="button" class="theme-preset-btn {{ $hDesk == '280px' ? 'active' : '' }}" onclick="selectCoverHeight('280px', 'desktop', this)" data-height="280px" style="padding: 0.6rem 1.15rem; cursor: pointer;">
-                                <i class="fa-solid fa-arrows-up-down"></i> Gọn gàng (280px)
+                                <i class="fa-solid fa-arrows-up-down"></i> Gọn gàng
                             </button>
                             <button type="button" class="theme-preset-btn {{ $hDesk == '350px' ? 'active' : '' }}" onclick="selectCoverHeight('350px', 'desktop', this)" data-height="350px" style="padding: 0.6rem 1.15rem; cursor: pointer;">
-                                <i class="fa-solid fa-arrows-up-down"></i> Vừa vặn (350px - Tiêu chuẩn)
+                                <i class="fa-solid fa-arrows-up-down"></i> Vừa vặn
                             </button>
                             <button type="button" class="theme-preset-btn {{ $hDesk == '420px' ? 'active' : '' }}" onclick="selectCoverHeight('420px', 'desktop', this)" data-height="420px" style="padding: 0.6rem 1.15rem; cursor: pointer;">
-                                <i class="fa-solid fa-arrows-up-down"></i> Hùng vĩ & Lớn (420px)
+                                <i class="fa-solid fa-arrows-up-down"></i> Hùng vĩ & Lớn
                             </button>
                         </div>
                     </div>
@@ -458,9 +455,6 @@
                     <div style="margin-bottom: 1.5rem; text-align: center;">
                         <div style="font-size: 0.82rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.75rem; display: flex; justify-content: space-between; align-items: center; max-width: 420px; margin-left: auto; margin-right: auto;">
                             <span>Mô phỏng hiển thị trên Smartphone:</span>
-                            <span id="coverCurrentMobileHeightText" style="font-size: 0.78rem; color: #16a34a; font-weight: 700; background: #dcfce7; padding: 0.2rem 0.6rem; border-radius: 4px;">
-                                Chiều cao: {{ $settings['cover_height_mobile'] ?? '220px' }}
-                            </span>
                         </div>
 
                         <div class="smartphone-mockup-frame" style="max-width: 320px; margin: 0 auto; background: #0f172a; padding: 12px; border-radius: 36px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);">
@@ -526,13 +520,13 @@
                         <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;" id="coverMobileHeightBtnGroup">
                             @php $hMob = $settings['cover_height_mobile'] ?? '220px'; @endphp
                             <button type="button" class="theme-preset-btn {{ $hMob == '180px' ? 'active' : '' }}" onclick="selectCoverHeight('180px', 'mobile', this)" data-height="180px" style="padding: 0.6rem 1.15rem; cursor: pointer;">
-                                <i class="fa-solid fa-arrows-up-down"></i> Gọn gàng (180px)
+                                <i class="fa-solid fa-arrows-up-down"></i> Gọn gàng
                             </button>
                             <button type="button" class="theme-preset-btn {{ $hMob == '220px' ? 'active' : '' }}" onclick="selectCoverHeight('220px', 'mobile', this)" data-height="220px" style="padding: 0.6rem 1.15rem; cursor: pointer;">
-                                <i class="fa-solid fa-arrows-up-down"></i> Chuẩn Mobile (220px - Khuyên dùng)
+                                <i class="fa-solid fa-arrows-up-down"></i> Chuẩn Mobile
                             </button>
                             <button type="button" class="theme-preset-btn {{ $hMob == '260px' ? 'active' : '' }}" onclick="selectCoverHeight('260px', 'mobile', this)" data-height="260px" style="padding: 0.6rem 1.15rem; cursor: pointer;">
-                                <i class="fa-solid fa-arrows-up-down"></i> Rộng rãi (260px)
+                                <i class="fa-solid fa-arrows-up-down"></i> Rộng rãi
                             </button>
                         </div>
                     </div>

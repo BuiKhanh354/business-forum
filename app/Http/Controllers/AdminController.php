@@ -818,10 +818,9 @@ class AdminController extends Controller
                            ->withQueryString();
 
         // Thống kê nhanh
-        $totalProposals     = Proposal::count();
-        $pendingProposals   = Proposal::where('status', 'pending')->count();
-        $contactedProposals = Proposal::where('status', 'contacted')->count();
-        $approvedProposals  = Proposal::where('status', 'approved')->count();
+        $totalProposals      = Proposal::count();
+        $attachmentProposals = Proposal::whereNotNull('attachment')->where('attachment', '!=', '')->count();
+        $starredProposals    = Proposal::where('is_starred', true)->count();
 
         // Danh sách mục đích thực tế để lọc
         $purposes = Proposal::select('purpose')->distinct()->pluck('purpose');
@@ -839,9 +838,8 @@ class AdminController extends Controller
         return view('pages.manage-proposals', compact(
             'proposals',
             'totalProposals',
-            'pendingProposals',
-            'contactedProposals',
-            'approvedProposals',
+            'attachmentProposals',
+            'starredProposals',
             'purposes',
             'autoOpenProposal'
         ));

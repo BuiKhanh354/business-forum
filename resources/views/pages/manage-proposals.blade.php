@@ -27,8 +27,8 @@
     </div>
   @endif
 
-  <!-- 4 THẺ THỐNG KÊ (ĐỒNG BỘ 100% DATABASE) -->
-  <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 1.75rem;">
+  <!-- 3 THẺ THỐNG KÊ (ĐỒNG BỘ 100% DATABASE) -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 1.75rem;">
     <!-- 1. Tổng đề xuất -->
     <div class="widget-card" style="padding: 1.25rem;">
       <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">TỔNG THƯ NGỎ</div>
@@ -38,31 +38,22 @@
       <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Đã tiếp nhận toàn thời gian</div>
     </div>
 
-    <!-- 2. Chờ xử lý -->
-    <div class="widget-card" style="padding: 1.25rem; border-left: 3px solid #f59e0b;">
-      <div style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; text-transform: uppercase;">CHỜ PHẢN HỒI</div>
-      <div style="font-size: 1.85rem; font-weight: 800; color: #f59e0b; margin: 0.35rem 0;">
-        {{ number_format($pendingProposals ?? 0) }}
-      </div>
-      <div style="font-size: 0.75rem; color: #b45309; font-weight: 600;">Cần xử lý trong 24 giờ</div>
-    </div>
-
-    <!-- 3. Đang trao đổi -->
-    <div class="widget-card" style="padding: 1.25rem; border-left: 3px solid var(--executive-blue);">
-      <div style="font-size: 0.75rem; color: var(--executive-blue); font-weight: 700; text-transform: uppercase;">ĐANG TRAO ĐỔI</div>
-      <div style="font-size: 1.85rem; font-weight: 800; color: var(--executive-blue); margin: 0.35rem 0;">
-        {{ number_format($contactedProposals ?? 0) }}
-      </div>
-      <div style="font-size: 0.75rem; color: var(--executive-blue); font-weight: 600;">Đang kết nối & thảo luận</div>
-    </div>
-
-    <!-- 4. Đã chấp thuận -->
+    <!-- 2. Có tài liệu đính kèm -->
     <div class="widget-card" style="padding: 1.25rem; border-left: 3px solid #16a34a;">
-      <div style="font-size: 0.75rem; color: #16a34a; font-weight: 700; text-transform: uppercase;">ĐÃ HỢP TÁC</div>
+      <div style="font-size: 0.75rem; color: #16a34a; font-weight: 700; text-transform: uppercase;">CÓ TÀI LIỆU ĐÍNH KÈM</div>
       <div style="font-size: 1.85rem; font-weight: 800; color: #16a34a; margin: 0.35rem 0;">
-        {{ number_format($approvedProposals ?? 0) }}
+        {{ number_format($attachmentProposals ?? 0) }}
       </div>
-      <div style="font-size: 0.75rem; color: #16a34a; font-weight: 600;">Đã chốt hợp tác thành công</div>
+      <div style="font-size: 0.75rem; color: #15803d; font-weight: 600;">Hồ sơ năng lực & tài liệu gửi kèm</div>
+    </div>
+
+    <!-- 3. Ưu tiên gắn sao -->
+    <div class="widget-card" style="padding: 1.25rem; border-left: 3px solid #f59e0b;">
+      <div style="font-size: 0.75rem; color: #f59e0b; font-weight: 700; text-transform: uppercase;">ƯU TIÊN GẮN SAO</div>
+      <div style="font-size: 1.85rem; font-weight: 800; color: #f59e0b; margin: 0.35rem 0;">
+        {{ number_format($starredProposals ?? 0) }}
+      </div>
+      <div style="font-size: 0.75rem; color: #b45309; font-weight: 600;">Thư ngỏ quan trọng cần ưu tiên</div>
     </div>
   </div>
 
@@ -101,45 +92,19 @@
           </select>
         </div>
 
-        <div style="display: flex; gap: 0.5rem;">
+        <div style="display: flex; gap: 0.5rem; align-items: center;">
           <button type="submit" class="cat-pill active" style="font-size: 0.84rem; padding: 0.55rem 1rem; border-radius: 6px; cursor: pointer;">
             <i class="fa-solid fa-filter"></i> Lọc dữ liệu
           </button>
-          @if(request()->hasAny(['keyword', 'status', 'purpose', 'starred']))
+          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['starred', 'page']), ['starred' => request('starred') === '1' ? null : '1'])) }}" class="cat-pill {{ request('starred') === '1' ? 'active' : '' }}" style="text-decoration: none; font-size: 0.84rem; display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.55rem 0.85rem;">
+            <i class="fa-solid fa-star" style="color: {{ request('starred') === '1' ? '#f59e0b' : '#94a3b8' }};"></i>
+            <span>{{ request('starred') === '1' ? 'Đang lọc: Gắn sao' : 'Thư gắn sao' }}</span>
+          </a>
+          @if(request()->hasAny(['keyword', 'purpose', 'starred']))
             <a href="{{ route('admin.proposals.index') }}" class="cat-pill" style="font-size: 0.84rem; padding: 0.55rem 0.85rem; border-radius: 6px; text-decoration: none; color: var(--text-muted); background: #ffffff; display: flex; align-items: center; gap: 0.35rem;">
               <i class="fa-solid fa-rotate-left"></i> Xóa lọc
             </a>
           @endif
-        </div>
-      </div>
-
-      <!-- Hàng 2: Tabs trạng thái & Bộ lọc Sao -->
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.5rem; border-top: 1px solid #f1f5f9;">
-        <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
-          <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-title); margin-right: 0.35rem;">Trạng thái:</span>
-          
-          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['status', 'page']), ['status' => 'all'])) }}" class="cat-pill {{ (!request()->has('status') || request('status') === 'all') ? 'active' : '' }}" style="text-decoration: none;">
-            Tất cả ({{ $totalProposals }})
-          </a>
-          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['status', 'page']), ['status' => 'pending'])) }}" class="cat-pill {{ request('status') === 'pending' ? 'active' : '' }}" style="text-decoration: none; color: #b45309; border-color: #fde68a;">
-            <i class="fa-regular fa-clock"></i> Chờ xử lý ({{ $pendingProposals }})
-          </a>
-          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['status', 'page']), ['status' => 'contacted'])) }}" class="cat-pill {{ request('status') === 'contacted' ? 'active' : '' }}" style="text-decoration: none; color: var(--executive-blue); border-color: #bfdbfe;">
-            <i class="fa-solid fa-comments"></i> Đang trao đổi ({{ $contactedProposals }})
-          </a>
-          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['status', 'page']), ['status' => 'approved'])) }}" class="cat-pill {{ request('status') === 'approved' ? 'active' : '' }}" style="text-decoration: none; color: #16a34a; border-color: #bbf7d0;">
-            <i class="fa-solid fa-check"></i> Đã chấp thuận ({{ $approvedProposals }})
-          </a>
-          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['status', 'page']), ['status' => 'declined'])) }}" class="cat-pill {{ request('status') === 'declined' ? 'active' : '' }}" style="text-decoration: none; color: #64748b;">
-            Từ chối / Đóng
-          </a>
-        </div>
-
-        <div>
-          <a href="{{ route('admin.proposals.index', array_merge(request()->except(['starred', 'page']), ['starred' => request('starred') === '1' ? null : '1'])) }}" class="cat-pill {{ request('starred') === '1' ? 'active' : '' }}" style="text-decoration: none; font-size: 0.78rem; display: inline-flex; align-items: center; gap: 0.35rem;">
-            <i class="fa-solid fa-star" style="color: {{ request('starred') === '1' ? '#f59e0b' : '#94a3b8' }};"></i>
-            <span>{{ request('starred') === '1' ? 'Đang lọc: Thư ngỏ gắn sao' : 'Xem thư ngỏ gắn sao' }}</span>
-          </a>
         </div>
       </div>
     </form>
@@ -247,14 +212,19 @@
                     <i class="fa-regular fa-eye"></i> Chi tiết
                   </button>
 
-                  <!-- Nút xóa -->
-                  <form action="{{ route('admin.proposals.destroy', $item->id) }}" method="POST" style="display: inline;" onsubmit="return confirm('Bạn có chắc chắn muốn xóa hồ sơ đề xuất này không? Hành động này không thể khôi phục.')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="cat-pill" style="font-size: 0.78rem; padding: 0.35rem 0.55rem; background: #fff; border-color: #fecaca; color: #ef4444; cursor: pointer; border-radius: 5px;" title="Xóa đề xuất">
-                      <i class="fa-regular fa-trash-can"></i>
-                    </button>
-                  </form>
+                  <!-- Nút xóa: Mở Popup Modal Xác nhận -->
+                  <button type="button" class="cat-pill btn-delete-proposal-trigger"
+                    onclick="openDeleteProposalModal(this)"
+                    data-id="{{ $item->id }}"
+                    data-sender="{{ $item->name }}"
+                    data-company="{{ $item->company ?? '' }}"
+                    data-subject="{{ $item->subject }}"
+                    data-purpose="{{ $item->purpose }}"
+                    data-delete-url="{{ route('admin.proposals.destroy', $item->id) }}"
+                    style="font-size: 0.78rem; padding: 0.35rem 0.55rem; background: #fff; border-color: #fecaca; color: #ef4444; cursor: pointer; border-radius: 5px;"
+                    title="Xóa đề xuất">
+                    <i class="fa-regular fa-trash-can"></i>
+                  </button>
                 </div>
               </td>
             </tr>
@@ -437,6 +407,69 @@
       </button>
     </div>
 
+  </div>
+</div>
+
+<!-- ======================================================================
+     MODAL POPUP: XÁC NHẬN XÓA ĐỀ XUẤT HỢP TÁC (GIAO DIỆN CHUYÊN NGHIỆP)
+     ====================================================================== -->
+<div class="modal fade" id="deleteProposalModal" tabindex="-1" aria-labelledby="deleteProposalModalLabel" aria-hidden="true" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 480px; width: 92%;">
+    <div class="modal-content" style="border-radius: 14px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); background-color: var(--bg-card, #ffffff); overflow: hidden;">
+      
+      <!-- Modal Header -->
+      <div class="modal-header" style="border-bottom: 1px solid var(--border-card, #f1f5f9); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(239, 68, 68, 0.12); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; border: 1px solid rgba(239, 68, 68, 0.2);">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h5 class="modal-title" id="deleteProposalModalLabel" style="font-size: 1.05rem; font-weight: 800; color: var(--text-title, #0f172a); margin: 0;">
+              Xác nhận xóa đề xuất
+            </h5>
+            <p style="font-size: 0.75rem; color: var(--text-muted, #64748b); margin: 0;">
+              Thao tác này sẽ gỡ thư ngỏ khỏi hệ thống
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" data-bs-dismiss="modal" onclick="closeDeleteProposalModal()" aria-label="Đóng" style="background: none; border: none; color: var(--text-muted); font-size: 1.15rem; cursor: pointer; padding: 0.35rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; line-height: 1;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Form Xác nhận Xóa -->
+      <form id="deleteProposalForm" action="" method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-body" style="padding: 1.5rem;">
+          <p style="font-size: 0.92rem; color: var(--text-body, #1e293b); line-height: 1.6; margin: 0 0 0.85rem 0;">
+            Bạn có chắc chắn muốn xóa hồ sơ đề xuất của <strong id="deleteProposalSenderTarget" style="color: #ef4444;"></strong>?
+          </p>
+
+          <div style="background: var(--bg-subtle, #f8fafc); border: 1px solid var(--border-card, #e2e8f0); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
+            <div id="deleteProposalSubjectTarget" style="font-size: 0.9rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.35rem; line-height: 1.4;"></div>
+            <div id="deleteProposalMetaTarget" style="font-size: 0.76rem; color: var(--text-muted); display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+          </div>
+
+          <div style="background: rgba(239, 68, 68, 0.05); border: 1px dashed rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 0.75rem 1rem; display: flex; align-items: flex-start; gap: 0.65rem;">
+            <i class="fa-solid fa-circle-exclamation" style="color: #ef4444; font-size: 0.95rem; margin-top: 0.15rem; flex-shrink: 0;"></i>
+            <span style="font-size: 0.78rem; color: var(--text-muted, #64748b); line-height: 1.45;">
+              Hồ sơ đề xuất cùng tài liệu đính kèm sẽ bị xóa vĩnh viễn và <strong>không thể khôi phục lại</strong>.
+            </span>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer" style="border-top: 1px solid var(--border-card, #f1f5f9); padding: 1rem 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem; background: var(--bg-subtle, #f8fafc);">
+          <button type="button" class="btn" onclick="closeDeleteProposalModal()" data-bs-dismiss="modal" style="font-size: 0.85rem; font-weight: 600; padding: 0.55rem 1.15rem; border-radius: 6px; color: var(--text-muted, #64748b); background: var(--bg-card, #ffffff); border: 1px solid var(--border-card, #cbd5e1); cursor: pointer; transition: all 0.2s;">
+            Hủy bỏ
+          </button>
+          <button type="submit" class="btn" style="background-color: #ef4444; border: none; color: #ffffff; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.35rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); transition: background-color 0.2s;">
+            <i class="fa-solid fa-trash-can"></i> Xác nhận xóa
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 
