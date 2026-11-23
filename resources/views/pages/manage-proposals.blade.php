@@ -290,6 +290,9 @@
     </div>
   </div>
 </main>
+@endsection
+
+@section('modals')
 
 <!-- ======================================================================
      MODAL POPUP: CHI TIẾT ĐỀ XUẤT / THƯ NGỎ HỢP TÁC
@@ -401,7 +404,10 @@
     </div>
 
     <!-- Modal Footer -->
-    <div style="padding: 1rem 1.5rem; border-top: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: flex-end; background: #f8fafc;">
+    <div style="padding: 1rem 1.5rem; border-top: 1px solid var(--border-light, #f1f5f9); display: flex; align-items: center; justify-content: space-between; background: var(--bg-subtle, #f8fafc);">
+      <button type="button" onclick="openDeleteProposalFromDetail()" class="cat-pill" style="font-size: 0.82rem; padding: 0.5rem 1rem; background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; cursor: pointer; border-radius: 6px; font-weight: 700; display: inline-flex; align-items: center; gap: 0.4rem; transition: all 0.2s ease;">
+        <i class="fa-regular fa-trash-can"></i> Xóa đề xuất này
+      </button>
       <button type="button" onclick="closeProposalModal()" class="cat-pill" style="font-size: 0.84rem; padding: 0.5rem 1.35rem; background: #ffffff; cursor: pointer; border-radius: 6px; font-weight: 700;">
         Đóng cửa sổ
       </button>
@@ -411,9 +417,9 @@
 </div>
 
 <!-- ======================================================================
-     MODAL POPUP: XÁC NHẬN XÓA ĐỀ XUẤT HỢP TÁC (GIAO DIỆN CHUYÊN NGHIỆP)
+     MODAL POPUP: XÁC NHẬN XÓA ĐỀ XUẤT HỢP TÁC (CHUẨN MEDIAN UI)
      ====================================================================== -->
-<div class="modal fade" id="deleteProposalModal" tabindex="-1" aria-labelledby="deleteProposalModalLabel" aria-hidden="true" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+<div class="modal fade" id="deleteProposalModal" tabindex="-1" aria-labelledby="deleteProposalModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" style="max-width: 480px; width: 92%;">
     <div class="modal-content" style="border-radius: 14px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); background-color: var(--bg-card, #ffffff); overflow: hidden;">
       
@@ -476,8 +482,92 @@
 @if(isset($autoOpenProposal) && $autoOpenProposal)
 <div id="autoOpenProposalData" style="display:none;" data-proposal='@json($autoOpenProposal)'></div>
 @endif
+@endsection
 
-<script src="{{ asset('js/manage-proposals.js') }}"></script>
+@push('scripts')
+<script>
+// Khai báo sớm hàm xóa để đảm bảo luôn chạy kể cả khi cache
+window.openDeleteProposalModal = function(btn) {
+  if (!btn) return;
+  const deleteUrl = btn.getAttribute('data-delete-url');
+  const sender = btn.getAttribute('data-sender');
+  const company = btn.getAttribute('data-company');
+  const subject = btn.getAttribute('data-subject');
+  const purpose = btn.getAttribute('data-purpose');
+
+  const form = document.getElementById('deleteProposalForm');
+  const senderTarget = document.getElementById('deleteProposalSenderTarget');
+  const subjectTarget = document.getElementById('deleteProposalSubjectTarget');
+  const metaTarget = document.getElementById('deleteProposalMetaTarget');
+
+  if (form) form.action = deleteUrl;
+  if (senderTarget) senderTarget.textContent = sender + (company ? ' (' + company + ')' : '');
+  if (subjectTarget) subjectTarget.textContent = subject || 'Thư ngỏ đề xuất';
+  if (metaTarget) {
+    metaTarget.innerHTML = `
+      <span style="background: #e0e7ff; color: #4338ca; padding: 2px 7px; border-radius: 4px; font-weight: 700;">${purpose || 'Đề xuất'}</span>
+      <span>${sender}</span>
+    `;
+  }
+
+  if (typeof window.openModal === 'function') {
+    window.openModal('deleteProposalModal');
+  } else {
+    const modal = document.getElementById('deleteProposalModal');
+    if (modal) {
+      modal.classList.add('show', 'active');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+};
+
+window.closeDeleteProposalModal = function() {
+  if (typeof window.closeModal === 'function') {
+    window.closeModal('deleteProposalModal');
+  } else {
+    const modal = document.getElementById('deleteProposalModal');
+    if (modal) {
+      modal.classList.remove('show', 'active');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+};
+
+window.openDeleteProposalFromDetail = function() {
+  if (!window.currentViewingProposal) return;
+  const item = window.currentViewingProposal;
+  if (typeof window.closeProposalModal === 'function') window.closeProposalModal();
+  
+  const form = document.getElementById('deleteProposalForm');
+  const senderTarget = document.getElementById('deleteProposalSenderTarget');
+  const subjectTarget = document.getElementById('deleteProposalSubjectTarget');
+  const metaTarget = document.getElementById('deleteProposalMetaTarget');
+
+  if (form) form.action = '/admin/de-xuat-hop-tac/' + item.id;
+  if (senderTarget) senderTarget.textContent = (item.name || '') + (item.company ? ' (' + item.company + ')' : '');
+  if (subjectTarget) subjectTarget.textContent = item.subject || 'Thư ngỏ đề xuất';
+  if (metaTarget) {
+    metaTarget.innerHTML = `
+      <span style="background: #e0e7ff; color: #4338ca; padding: 2px 7px; border-radius: 4px; font-weight: 700;">${item.purpose || 'Đề xuất'}</span>
+      <span>${item.name || ''}</span>
+    `;
+  }
+
+  if (typeof window.openModal === 'function') {
+    window.openModal('deleteProposalModal');
+  } else {
+    const modal = document.getElementById('deleteProposalModal');
+    if (modal) {
+      modal.classList.add('show', 'active');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+};
+</script>
+<script src="{{ asset('js/manage-proposals.js') }}?v={{ time() }}"></script>
 
 <style>
 @keyframes modalFadeIn {
@@ -485,4 +575,4 @@
   to { opacity: 1; transform: scale(1); }
 }
 </style>
-@endsection
+@endpush

@@ -2,6 +2,8 @@ function openProposalModal(item) {
   const modal = document.getElementById('proposalDetailModal');
   if (!modal) return;
 
+  window.currentViewingProposal = item;
+
   document.getElementById('modalSubjectText').textContent = item.subject || 'Không có tiêu đề';
   document.getElementById('modalSenderName').textContent = item.name || '';
   
@@ -129,7 +131,6 @@ window.openDeleteProposalModal = function(btn) {
   const senderTarget = document.getElementById('deleteProposalSenderTarget');
   const subjectTarget = document.getElementById('deleteProposalSubjectTarget');
   const metaTarget = document.getElementById('deleteProposalMetaTarget');
-  const modal = document.getElementById('deleteProposalModal');
 
   if (form) form.action = deleteUrl;
   if (senderTarget) senderTarget.textContent = sender + (company ? ' (' + company + ')' : '');
@@ -141,20 +142,62 @@ window.openDeleteProposalModal = function(btn) {
     `;
   }
 
-  if (modal) {
-    modal.classList.add('show', 'active');
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+  if (typeof window.openModal === 'function') {
+    window.openModal('deleteProposalModal');
+  } else {
+    const modal = document.getElementById('deleteProposalModal');
+    if (modal) {
+      modal.classList.add('show', 'active');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
   }
 };
 
 // Hàm đóng popup Xác nhận Xóa đề xuất
 window.closeDeleteProposalModal = function() {
-  const modal = document.getElementById('deleteProposalModal');
-  if (modal) {
-    modal.classList.remove('show', 'active');
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
+  if (typeof window.closeModal === 'function') {
+    window.closeModal('deleteProposalModal');
+  } else {
+    const modal = document.getElementById('deleteProposalModal');
+    if (modal) {
+      modal.classList.remove('show', 'active');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  }
+};
+
+// Hàm mở popup Xóa đề xuất ngay từ cửa sổ Chi tiết
+window.openDeleteProposalFromDetail = function() {
+  if (!window.currentViewingProposal) return;
+  const item = window.currentViewingProposal;
+  if (typeof window.closeProposalModal === 'function') window.closeProposalModal();
+
+  const form = document.getElementById('deleteProposalForm');
+  const senderTarget = document.getElementById('deleteProposalSenderTarget');
+  const subjectTarget = document.getElementById('deleteProposalSubjectTarget');
+  const metaTarget = document.getElementById('deleteProposalMetaTarget');
+
+  if (form) form.action = '/admin/de-xuat-hop-tac/' + item.id;
+  if (senderTarget) senderTarget.textContent = (item.name || '') + (item.company ? ' (' + item.company + ')' : '');
+  if (subjectTarget) subjectTarget.textContent = item.subject || 'Thư ngỏ đề xuất';
+  if (metaTarget) {
+    metaTarget.innerHTML = `
+      <span style="background: #e0e7ff; color: #4338ca; padding: 2px 7px; border-radius: 4px; font-weight: 700;">${item.purpose || 'Đề xuất'}</span>
+      <span>${item.name || ''}</span>
+    `;
+  }
+
+  if (typeof window.openModal === 'function') {
+    window.openModal('deleteProposalModal');
+  } else {
+    const modal = document.getElementById('deleteProposalModal');
+    if (modal) {
+      modal.classList.add('show', 'active');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
   }
 };
 

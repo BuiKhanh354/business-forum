@@ -4,6 +4,9 @@
 @section('breadcrumb', 'WORKSPACE / TÀI KHOẢN & HỆ THỐNG / THÔNG TIN CÁ NHÂN')
 
 @section('content')
+@php
+    $socialLinks = $socialLinks ?? [];
+@endphp
 <main class="main-content-scroll">
     <!-- TIÊU ĐỀ TRANG -->
     <div class="content-header-row" style="margin-bottom: 2rem;">
@@ -66,46 +69,61 @@
                 @endif
             </div>
 
-            <!-- THẺ WIDGET-CARD: LIÊN KẾT MẠNG XÃ HỘI CHÍNH THỨC -->
-            <div class="widget-card" style="padding: 1.75rem 1.5rem; border: 1px solid var(--border-card); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.65rem; flex-wrap: wrap; gap: 0.5rem;">
+            <!-- THẺ WIDGET-CARD: LIÊN KẾT MẠNG XÃ HỘI CHÍNH THỨC (CÓ MŨI TÊN ĐÓNG/MỞ) -->
+            <div class="widget-card" style="padding: 1.25rem 1.5rem; border: 1px solid var(--border-card); box-shadow: 0 4px 15px rgba(0,0,0,0.03); transition: all 0.25s ease;">
+                <!-- Header bấm để mở/đóng danh sách -->
+                <div onclick="toggleSocialLinksCard()" style="display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none;" title="Bấm để mở / đóng danh sách mạng xã hội">
                     <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-title); display: flex; align-items: center; gap: 0.5rem;">
                         <i class="fa-solid fa-share-nodes" style="color: var(--executive-blue);"></i>
                         <span>Mạng xã hội chính thức</span>
+                        <span id="socialLinksCountBadge" style="font-size: 0.72rem; font-weight: 700; background: var(--bg-subtle, #f1f5f9); color: var(--text-muted); padding: 2px 7px; border-radius: 999px; border: 1px solid var(--border-card, #e2e8f0);">
+                            {{ count($socialLinks) }}
+                        </span>
                     </div>
-                    <button type="button" onclick="addSocialLinkRow()" class="cat-pill" style="font-size: 0.76rem; padding: 0.35rem 0.65rem; background: #ffffff; border: 1px solid #cbd5e1; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; color: var(--executive-blue); font-weight: 700;">
-                        <i class="fa-solid fa-plus"></i> Thêm link
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                        <button type="button" class="btn-toggle-social" aria-label="Đóng mở danh sách mạng xã hội" style="background: var(--bg-subtle, #f8fafc); border: 1px solid var(--border-card, #e2e8f0); color: var(--text-title); width: 30px; height: 30px; border-radius: 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;">
+                            <i class="fa-solid fa-chevron-down" id="socialToggleArrow" style="font-size: 0.8rem; transition: transform 0.25s ease; transform: rotate(-90deg);"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Thân nội dung có thể thu gọn / mở rộng (Mặc định đóng, bấm mũi tên hiện ra) -->
+                <div id="socialLinksCollapsibleBody" style="display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-light, #f1f5f9);">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+                        <p style="font-size: 0.74rem; color: var(--text-muted); margin: 0; line-height: 1.45; flex: 1; min-width: 180px;">
+                            Dán liên kết bất kỳ (Facebook, TikTok, YouTube...). Hệ thống tự nhận diện favicon!
+                        </p>
+                        <button type="button" onclick="event.stopPropagation(); addSocialLinkRow()" class="cat-pill" style="font-size: 0.75rem; padding: 0.3rem 0.65rem; background: #ffffff; border: 1px solid #cbd5e1; cursor: pointer; display: flex; align-items: center; gap: 0.35rem; color: var(--executive-blue); font-weight: 700; flex-shrink: 0;">
+                            <i class="fa-solid fa-plus"></i> Thêm link
+                        </button>
+                    </div>
+
+                    <!-- Danh sách liên kết mạng xã hội động -->
+                    <div id="socialLinksListContainer" style="display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem;">
+                        @foreach($socialLinks as $linkUrl)
+                            @php
+                                $linkHost = parse_url($linkUrl, PHP_URL_HOST) ?? '';
+                                $cleanDomain = preg_replace('/^www\./', '', strtolower($linkHost));
+                                $favUrl = "https://www.google.com/s2/favicons?domain=" . ($cleanDomain ?: 'example.com') . "&sz=64";
+                            @endphp
+                            <div class="social-link-item" style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-subtle, #f8fafc); padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid var(--border-card, #e2e8f0); transition: all 0.2s ease;">
+                                <div class="social-tab-icon-box" style="width: 32px; height: 32px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 4px;">
+                                    <img class="social-tab-favicon-img" src="{{ $favUrl }}" alt="Tab Icon" style="width: 18px; height: 18px; object-fit: contain;" onerror="this.src='https://www.google.com/s2/favicons?domain=example.com&sz=64'">
+                                </div>
+                                <div style="flex: 1; min-width: 0;">
+                                    <input type="url" name="social_links[]" form="profileUpdateForm" value="{{ $linkUrl }}" placeholder="https://..." style="width: 100%; padding: 0.4rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; outline: none; background: #ffffff;" oninput="updateSocialFavicon(this)">
+                                </div>
+                                <button type="button" onclick="this.closest('.social-link-item').remove(); if(window.updateSocialCountBadge) window.updateSocialCountBadge();" style="background: #ffffff; border: 1px solid #fecaca; color: #dc2626; border-radius: 6px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" title="Xóa liên kết này">
+                                    <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
+                                </button>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <button type="button" onclick="document.getElementById('profileUpdateForm').requestSubmit()" class="btn-publish-trigger" style="width: 100%; justify-content: center; background-color: var(--executive-blue); font-size: 0.82rem; padding: 0.55rem 1rem; border: none; border-radius: 6px; color: #fff; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);">
+                        <i class="fa-solid fa-floppy-disk"></i> Lưu liên kết mạng xã hội
                     </button>
                 </div>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.45;">
-                    Dán liên kết bất kỳ (Facebook, TikTok, YouTube, Zalo, Website...). Hệ thống tự nhận diện icon tab của website đó!
-                </p>
-
-                <!-- Danh sách liên kết mạng xã hội động -->
-                <div id="socialLinksListContainer" style="display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem;">
-                    @foreach($socialLinks as $linkUrl)
-                        @php
-                            $linkHost = parse_url($linkUrl, PHP_URL_HOST) ?? '';
-                            $cleanDomain = preg_replace('/^www\./', '', strtolower($linkHost));
-                            $favUrl = "https://www.google.com/s2/favicons?domain=" . ($cleanDomain ?: 'example.com') . "&sz=64";
-                        @endphp
-                        <div class="social-link-item" style="display: flex; align-items: center; gap: 0.5rem; background: var(--bg-subtle, #f8fafc); padding: 0.5rem 0.65rem; border-radius: 8px; border: 1px solid var(--border-card, #e2e8f0); transition: all 0.2s ease;">
-                            <div class="social-tab-icon-box" style="width: 32px; height: 32px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 4px;">
-                                <img class="social-tab-favicon-img" src="{{ $favUrl }}" alt="Tab Icon" style="width: 18px; height: 18px; object-fit: contain;" onerror="this.src='https://www.google.com/s2/favicons?domain=example.com&sz=64'">
-                            </div>
-                            <div style="flex: 1; min-width: 0;">
-                                <input type="url" name="social_links[]" form="profileUpdateForm" value="{{ $linkUrl }}" placeholder="https://..." style="width: 100%; padding: 0.4rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; outline: none; background: #ffffff;" oninput="updateSocialFavicon(this)">
-                            </div>
-                            <button type="button" onclick="this.closest('.social-link-item').remove()" style="background: #ffffff; border: 1px solid #fecaca; color: #dc2626; border-radius: 6px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" title="Xóa liên kết này">
-                                <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
-                            </button>
-                        </div>
-                    @endforeach
-                </div>
-
-                <button type="button" onclick="document.getElementById('profileUpdateForm').requestSubmit()" class="btn-publish-trigger" style="width: 100%; justify-content: center; background-color: var(--executive-blue); font-size: 0.82rem; padding: 0.55rem 1rem; border: none; border-radius: 6px; color: #fff; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);">
-                    <i class="fa-solid fa-floppy-disk"></i> Lưu liên kết mạng xã hội
-                </button>
             </div>
         </div>
 
@@ -346,5 +364,32 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/profile.js') }}"></script>
+<script>
+// Hàm đóng/mở thẻ Mạng xã hội chính thức
+window.toggleSocialLinksCard = function(forceOpen) {
+    const body = document.getElementById('socialLinksCollapsibleBody');
+    const arrow = document.getElementById('socialToggleArrow');
+    if (!body) return;
+    const isHidden = body.style.display === 'none' || getComputedStyle(body).display === 'none';
+    const shouldOpen = (typeof forceOpen === 'boolean') ? forceOpen : isHidden;
+    
+    if (shouldOpen) {
+        body.style.display = 'block';
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+    } else {
+        body.style.display = 'none';
+        if (arrow) arrow.style.transform = 'rotate(-90deg)';
+    }
+};
+
+window.updateSocialCountBadge = function() {
+    const container = document.getElementById('socialLinksListContainer');
+    const badge = document.getElementById('socialLinksCountBadge');
+    if (container && badge) {
+        const count = container.querySelectorAll('.social-link-item').length;
+        badge.textContent = count;
+    }
+};
+</script>
+<script src="{{ asset('js/profile.js') }}?v={{ time() }}"></script>
 @endpush

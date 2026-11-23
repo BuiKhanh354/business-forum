@@ -711,7 +711,7 @@ window.copyPostShareLink = function (url) {
   const targetUrl = url || window.location.href;
 
   function onCopied() {
-    window.showToastNotification('Đã sao chép liên kết bài viết vào bộ nhớ tạm!');
+    window.showToastNotification('Đã sao chép liên kết bài viết!');
   }
 
   function onFailed() {

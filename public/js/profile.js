@@ -110,10 +110,39 @@ window.updateSocialFavicon = function(input) {
     }
 };
 
+// Đóng/mở thẻ Mạng xã hội chính thức
+window.toggleSocialLinksCard = function(forceOpen) {
+    const body = document.getElementById('socialLinksCollapsibleBody');
+    const arrow = document.getElementById('socialToggleArrow');
+    if (!body) return;
+    const isHidden = body.style.display === 'none' || getComputedStyle(body).display === 'none';
+    const shouldOpen = (typeof forceOpen === 'boolean') ? forceOpen : isHidden;
+    
+    if (shouldOpen) {
+        body.style.display = 'block';
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+    } else {
+        body.style.display = 'none';
+        if (arrow) arrow.style.transform = 'rotate(-90deg)';
+    }
+};
+
+window.updateSocialCountBadge = function() {
+    const container = document.getElementById('socialLinksListContainer');
+    const badge = document.getElementById('socialLinksCountBadge');
+    if (container && badge) {
+        const count = container.querySelectorAll('.social-link-item').length;
+        badge.textContent = count;
+    }
+};
+
 // Thêm hàng liên kết mạng xã hội mới
 window.addSocialLinkRow = function(defaultUrl = '') {
     const container = document.getElementById('socialLinksListContainer');
     if (!container) return;
+
+    // Tự động mở rộng khối liên kết nếu đang đóng
+    window.toggleSocialLinksCard(true);
 
     const row = document.createElement('div');
     row.className = 'social-link-item';
@@ -130,12 +159,13 @@ window.addSocialLinkRow = function(defaultUrl = '') {
         <div style="flex: 1; min-width: 0;">
             <input type="url" name="social_links[]" form="profileUpdateForm" value="${defaultUrl}" placeholder="https://..." style="width: 100%; padding: 0.4rem 0.6rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.8rem; outline: none; background: #ffffff;" oninput="updateSocialFavicon(this)">
         </div>
-        <button type="button" onclick="this.closest('.social-link-item').remove()" style="background: #ffffff; border: 1px solid #fecaca; color: #dc2626; border-radius: 6px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" title="Xóa">
+        <button type="button" onclick="this.closest('.social-link-item').remove(); if(window.updateSocialCountBadge) window.updateSocialCountBadge();" style="background: #ffffff; border: 1px solid #fecaca; color: #dc2626; border-radius: 6px; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;" title="Xóa">
             <i class="fa-solid fa-trash-can" style="font-size: 0.8rem;"></i>
         </button>
     `;
 
     container.appendChild(row);
+    window.updateSocialCountBadge();
     const newInp = row.querySelector('input');
     if (newInp && !defaultUrl) newInp.focus();
 };
