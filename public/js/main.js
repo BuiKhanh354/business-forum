@@ -768,3 +768,88 @@ window.showToastNotification = function (message, type) {
     setTimeout(function () { toast.remove(); }, 300);
   }, 2500);
 };
+
+// Quản lý tìm kiếm trên điện thoại (Mobile Search Bar & Live Sync)
+document.addEventListener('DOMContentLoaded', function () {
+  const mobileSearchToggleBtn = document.getElementById("btnMobileSearchToggle");
+  const mobileBottomSearchBtn = document.getElementById("mobileSearchBtn");
+  const mobileSearchBar = document.getElementById("mobileSearchBar");
+  const mobileSearchInput = document.getElementById("mobileSearchInput");
+  const clearMobileSearchBtn = document.getElementById("btnClearMobileSearch");
+  const closeMobileSearchBtn = document.getElementById("btnCloseMobileSearch");
+  const topSearchInput = document.getElementById("topSearchInput");
+
+  function openMobileSearchBox() {
+    if (!mobileSearchBar) return;
+    mobileSearchBar.classList.add("active");
+    mobileSearchBar.style.display = "block";
+    if (mobileSearchInput) {
+      if (topSearchInput && topSearchInput.value) {
+        mobileSearchInput.value = topSearchInput.value;
+      }
+      setTimeout(() => mobileSearchInput.focus(), 120);
+      if (clearMobileSearchBtn) {
+        clearMobileSearchBtn.style.display = mobileSearchInput.value ? "inline-flex" : "none";
+      }
+    }
+  }
+
+  function closeMobileSearchBox() {
+    if (!mobileSearchBar) return;
+    mobileSearchBar.classList.remove("active");
+    mobileSearchBar.style.display = "none";
+  }
+
+  if (mobileSearchToggleBtn) {
+    mobileSearchToggleBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (mobileSearchBar && mobileSearchBar.classList.contains("active")) {
+        closeMobileSearchBox();
+      } else {
+        openMobileSearchBox();
+      }
+    });
+  }
+
+  if (mobileBottomSearchBtn) {
+    mobileBottomSearchBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openMobileSearchBox();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  if (closeMobileSearchBtn) {
+    closeMobileSearchBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeMobileSearchBox();
+    });
+  }
+
+  if (clearMobileSearchBtn && mobileSearchInput) {
+    clearMobileSearchBtn.addEventListener("click", function () {
+      mobileSearchInput.value = "";
+      clearMobileSearchBtn.style.display = "none";
+      if (topSearchInput) {
+        topSearchInput.value = "";
+        topSearchInput.dispatchEvent(new Event("input"));
+      }
+      mobileSearchInput.dispatchEvent(new Event("input"));
+      mobileSearchInput.focus();
+    });
+  }
+
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener("input", function (e) {
+      const val = e.target.value;
+      if (clearMobileSearchBtn) {
+        clearMobileSearchBtn.style.display = val.length > 0 ? "inline-flex" : "none";
+      }
+      if (topSearchInput) {
+        topSearchInput.value = val;
+        topSearchInput.dispatchEvent(new Event("input"));
+      }
+    });
+  }
+});

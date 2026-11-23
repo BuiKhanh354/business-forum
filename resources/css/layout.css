@@ -579,6 +579,84 @@
     font-size: 0.95rem;
     margin-left: auto;
   }
+  .btn-mobile-search-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-subtle, #f1f5f9);
+    border: 1px solid var(--border-card);
+    color: var(--text-title);
+    cursor: pointer;
+    font-size: 0.95rem;
+  }
+  .mobile-search-bar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--border-card);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+  }
+  .mobile-search-bar.active {
+    display: block !important;
+  }
+  .mobile-search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-subtle, #f1f5f9);
+    border: 1.5px solid var(--border-card);
+    border-radius: 8px;
+    padding: 0.35rem 0.75rem;
+    transition: all 0.2s ease;
+  }
+  .mobile-search-form:focus-within {
+    border-color: var(--executive-blue, #2563eb);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    background: var(--bg-card);
+  }
+  .mobile-search-icon {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .mobile-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.88rem;
+    color: var(--text-title);
+    padding: 0.35rem 0;
+    min-width: 0;
+  }
+  .mobile-search-input::placeholder {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .btn-clear-mobile-search,
+  .btn-close-mobile-search {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: color 0.15s ease;
+  }
+  .btn-clear-mobile-search:hover,
+  .btn-close-mobile-search:hover {
+    color: var(--text-title);
+  }
   .topbar-search-box {
     display: none;
   }

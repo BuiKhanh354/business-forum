@@ -263,14 +263,85 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Blog Mobile Bottom Navigation Handlers
-  const mobileSearchBtn = document.getElementById("mobileSearchBtn");
-  if (mobileSearchBtn) {
-    mobileSearchBtn.addEventListener("click", () => {
-      const searchInput = document.getElementById("topSearchInput");
-      if (searchInput) {
-        searchInput.focus();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+  // Blog Mobile Bottom Navigation & Topbar Search Handlers
+  const mobileSearchToggleBtn = document.getElementById("btnMobileSearchToggle");
+  const mobileBottomSearchBtn = document.getElementById("mobileSearchBtn");
+  const mobileSearchBar = document.getElementById("mobileSearchBar");
+  const mobileSearchInput = document.getElementById("mobileSearchInput");
+  const clearMobileSearchBtn = document.getElementById("btnClearMobileSearch");
+  const closeMobileSearchBtn = document.getElementById("btnCloseMobileSearch");
+
+  function openMobileSearchBox() {
+    if (!mobileSearchBar) return;
+    mobileSearchBar.classList.add("active");
+    mobileSearchBar.style.display = "block";
+    if (mobileSearchInput) {
+      if (topSearchInput && topSearchInput.value) {
+        mobileSearchInput.value = topSearchInput.value;
+      }
+      setTimeout(() => mobileSearchInput.focus(), 120);
+      if (clearMobileSearchBtn) {
+        clearMobileSearchBtn.style.display = mobileSearchInput.value ? "inline-flex" : "none";
+      }
+    }
+  }
+
+  function closeMobileSearchBox() {
+    if (!mobileSearchBar) return;
+    mobileSearchBar.classList.remove("active");
+    mobileSearchBar.style.display = "none";
+  }
+
+  if (mobileSearchToggleBtn) {
+    mobileSearchToggleBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (mobileSearchBar && mobileSearchBar.classList.contains("active")) {
+        closeMobileSearchBox();
+      } else {
+        openMobileSearchBox();
+      }
+    });
+  }
+
+  if (mobileBottomSearchBtn) {
+    mobileBottomSearchBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openMobileSearchBox();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  if (closeMobileSearchBtn) {
+    closeMobileSearchBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeMobileSearchBox();
+    });
+  }
+
+  if (clearMobileSearchBtn && mobileSearchInput) {
+    clearMobileSearchBtn.addEventListener("click", () => {
+      mobileSearchInput.value = "";
+      clearMobileSearchBtn.style.display = "none";
+      if (topSearchInput) {
+        topSearchInput.value = "";
+        topSearchInput.dispatchEvent(new Event("input"));
+      }
+      mobileSearchInput.dispatchEvent(new Event("input"));
+      mobileSearchInput.focus();
+    });
+  }
+
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener("input", (e) => {
+      const val = e.target.value;
+      if (clearMobileSearchBtn) {
+        clearMobileSearchBtn.style.display = val.length > 0 ? "inline-flex" : "none";
+      }
+      // Đồng bộ trực tiếp với topSearchInput để kích hoạt bộ lọc bài viết thời gian thực
+      if (topSearchInput) {
+        topSearchInput.value = val;
+        topSearchInput.dispatchEvent(new Event("input"));
       }
     });
   }

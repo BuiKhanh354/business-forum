@@ -29,6 +29,11 @@
 
     <!-- KHU VỰC THAO TÁC: DARK MODE, THÔNG BÁO & USER -->
     <div class="topbar-user-area">
+        <!-- NÚT MỞ TÌM KIẾM TRÊN MOBILE -->
+        <button type="button" class="btn-mobile-search-toggle" id="btnMobileSearchToggle" title="Tìm kiếm bài viết">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
         <!-- Nút Dark Mode Median UI -->
         <button type="button" class="median-icon-btn" id="themeToggleBtn" title="Chuyển chế độ Sáng / Tối">
             <i class="fa-solid fa-moon"></i>
@@ -163,5 +168,29 @@
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </button>
         @endauth
+    </div>
+
+    <!-- THANH TÌM KIẾM MỞ RỘNG TRÊN MOBILE (SLIDE DOWN) -->
+    <div class="mobile-search-bar" id="mobileSearchBar" style="display: none;">
+        <form action="{{ route('home') }}" method="GET" class="mobile-search-form" id="mobileSearchForm">
+            <span class="mobile-search-icon">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </span>
+            <input 
+                type="text" 
+                name="q" 
+                id="mobileSearchInput" 
+                class="mobile-search-input" 
+                placeholder="Tìm kiếm bài viết, chủ đề..." 
+                value="{{ request('q') }}"
+                autocomplete="off"
+            >
+            <button type="button" class="btn-clear-mobile-search" id="btnClearMobileSearch" style="display: none;" title="Xóa nội dung">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button type="button" class="btn-close-mobile-search" id="btnCloseMobileSearch" title="Đóng tìm kiếm">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </form>
     </div>
 </header>

@@ -23,6 +23,16 @@ class BlogController extends Controller
             });
         }
 
+        // Tìm kiếm theo từ khóa (hỗ trợ cả máy tính & điện thoại)
+        if ($request->filled('q')) {
+            $keyword = trim($request->query('q'));
+            $query->where(function ($q) use ($keyword) {
+                $q->where('title', 'like', "%{$keyword}%")
+                  ->orWhere('excerpt', 'like', "%{$keyword}%")
+                  ->orWhere('content', 'like', "%{$keyword}%");
+            });
+        }
+
         $posts = $query->orderBy('id', 'desc')->get();
 
         // Lấy danh sách các bài viết nổi bật: lấy theo lượt tim nhiều nhất (likes_count), tối đa 5 bài
