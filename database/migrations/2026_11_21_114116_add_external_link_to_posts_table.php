@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('external_link')->nullable()->after('cover_image');
-            $table->string('external_link_title')->nullable()->after('external_link');
+            if (!Schema::hasColumn('posts', 'external_link')) {
+                $table->string('external_link')->nullable();
+            }
+            if (!Schema::hasColumn('posts', 'external_link_title')) {
+                $table->string('external_link_title')->nullable();
+            }
         });
     }
 

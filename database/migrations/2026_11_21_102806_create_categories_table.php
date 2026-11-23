@@ -24,7 +24,7 @@ return new class extends Migration
         // Add category_id to posts table if posts table exists
         if (Schema::hasTable('posts') && !Schema::hasColumn('posts', 'category_id')) {
             Schema::table('posts', function (Blueprint $table) {
-                $table->foreignId('category_id')->nullable()->after('id')->constrained('categories')->nullOnDelete();
+                $table->foreignId('category_id')->nullable()->constrained('categories')->nullOnDelete();
             });
         }
     }

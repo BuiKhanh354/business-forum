@@ -49,9 +49,23 @@ class Setting extends Model
      */
     public static function getAllSettings()
     {
-        return Cache::remember('site_settings_all', 3600, function () {
-            return self::pluck('value', 'key')->toArray();
-        });
+        try {
+            if (!\Illuminate\Support\Facades\Schema::hasTable('settings')) {
+                \Illuminate\Support\Facades\Schema::create('settings', function ($table) {
+                    $table->id();
+                    $table->string('key')->unique();
+                    $table->longText('value')->nullable();
+                    $table->string('group', 50)->default('general');
+                    $table->timestamps();
+                });
+            }
+
+            return Cache::remember('site_settings_all', 3600, function () {
+                return self::pluck('value', 'key')->toArray();
+            });
+        } catch (\Throwable $e) {
+            return [];
+        }
     }
 
     /**
