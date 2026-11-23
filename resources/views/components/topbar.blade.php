@@ -29,11 +29,6 @@
 
     <!-- KHU VỰC THAO TÁC: DARK MODE, THÔNG BÁO & USER -->
     <div class="topbar-user-area">
-        <!-- NÚT MỞ TÌM KIẾM TRÊN MOBILE -->
-        <button type="button" class="btn-mobile-search-toggle" id="btnMobileSearchToggle" onclick="toggleMobileSearch()" title="Tìm kiếm bài viết">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-
         <!-- Nút Dark Mode Median UI -->
         <button type="button" class="median-icon-btn" id="themeToggleBtn" title="Chuyển chế độ Sáng / Tối">
             <i class="fa-solid fa-moon"></i>

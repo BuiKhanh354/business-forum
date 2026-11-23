@@ -14,10 +14,6 @@
         <i class="fa-solid fa-shapes"></i>
         <span>Chủ đề</span>
     </button>
-    <button type="button" class="mobile-nav-item" id="mobileThemeToggleBtn" title="Giao diện Tối/Sáng">
-        <i class="fa-solid fa-circle-half-stroke"></i>
-        <span>Giao diện</span>
-    </button>
     @auth
     <a href="{{ route('admin.profile') }}" class="mobile-nav-item {{ request()->routeIs('admin.profile') ? 'active' : '' }}" title="Cá nhân">
         <i class="fa-solid fa-user"></i>
