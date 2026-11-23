@@ -92,7 +92,6 @@
                     <thead>
                         <tr style="border-bottom: 2px solid var(--border-card); color: var(--text-muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px;">
                             <th style="padding: 0.75rem 0.5rem;">Tên danh mục</th>
-                            <th style="padding: 0.75rem 0.5rem;">Đường dẫn (Slug)</th>
                             <th style="padding: 0.75rem 0.5rem; text-align: center;">Số bài viết</th>
                             <th style="padding: 0.75rem 0.5rem; text-align: right;">Thao tác</th>
                         </tr>
@@ -107,9 +106,6 @@
                                             <div style="font-weight: 700; color: var(--text-title);">{{ $cat->name }}</div>
                                         </div>
                                     </div>
-                                </td>
-                                <td style="padding: 0.85rem 0.5rem;">
-                                    <code style="font-size: 0.78rem; color: var(--executive-blue); background: var(--bg-subtle); padding: 0.2rem 0.45rem; border-radius: 4px;">{{ $cat->slug }}</code>
                                 </td>
                                 <td style="padding: 0.85rem 0.5rem; text-align: center;">
                                     <span style="font-size: 0.78rem; font-weight: 800; background: var(--bg-subtle); padding: 0.2rem 0.6rem; border-radius: 999px; color: var(--obsidian);">
