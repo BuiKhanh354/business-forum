@@ -326,7 +326,7 @@
 
             <!-- WIDGET 1: THẺ ẢNH TÁC GIẢ & FOUNDER ADMIN (NẰM NGAY TRÊN BÀI VIẾT NỔI BẬT) -->
             <div class="median-author-widget">
-              <div class="median-author-cover" style="background-image: url('{{ asset($siteSettings['cover_desktop'] ?? 'assets/images/cover-banner.jpg') }}'); background-size: cover; background-position: center; height: 75px;"></div>
+              <div class="median-author-cover" style="background-image: url('{{ asset($siteSettings['cover_desktop'] ?? 'assets/images/cover-banner.jpg') }}'); background-size: cover; background-position: center; height: 54px; margin: -1.15rem -1.15rem 0 -1.15rem;"></div>
               <div class="median-author-avatar-wrap">
                 <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser->name ?? 'Admin Khánh' }}">
               </div>
