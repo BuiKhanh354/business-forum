@@ -337,54 +337,6 @@
             transform: none;
         }
 
-        /* Demo hint */
-        .demo-account-hint {
-            margin-top: 1.75rem;
-            padding: 1.1rem;
-            background: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-align: center;
-        }
-
-        .demo-account-hint strong {
-            color: var(--text-title);
-        }
-
-        .demo-account-hint code {
-            background: #e2e8f0;
-            color: #0f172a;
-            padding: 0.15rem 0.4rem;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.82rem;
-        }
-
-        .btn-fill-demo {
-            margin-top: 0.75rem;
-            width: 100%;
-            padding: 0.5rem;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-        }
-
-        .btn-fill-demo:hover {
-            background: var(--primary-blue-light);
-            border-color: var(--primary-blue);
-        }
-
         /* Footer */
         .login-footer {
             padding: 1.5rem;
@@ -508,20 +460,6 @@
           <i class="fa-solid fa-arrow-right" id="submitArrowIcon"></i>
         </button>
       </form>
-
-      <!-- Hộp gợi ý tài khoản mẫu -->
-      <div class="demo-account-hint">
-        <div><strong>Tài khoản Quản trị Demo:</strong></div>
-        <div style="margin-top: 5px;">
-          Tài khoản: <code>adminnnnn@gmail.com</code> hoặc <code>admin</code>
-        </div>
-        <div style="margin-top: 3px;">
-          Mật khẩu: <code>admin123</code>
-        </div>
-        <button type="button" class="btn-fill-demo" id="btnAutoFillDemo">
-          <i class="fa-solid fa-bolt"></i> Điền nhanh tài khoản demo
-        </button>
-      </div>
 
     </div>
   </main>

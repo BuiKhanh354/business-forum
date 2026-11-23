@@ -79,13 +79,5 @@ php artisan serve
 
 ---
 
-## 🛡️ Tài khoản Quản trị Demo
-
-- **Đường dẫn đăng nhập**: `/dang-nhap` (hoặc nhấn `Ctrl + Shift + A` tại trang chủ)
-- **Tài khoản**: `adminnnnn@gmail.com` hoặc `admin`
-- **Mật khẩu**: `admin123`
-
----
-
 ## 📄 Bản quyền
 Phát triển bởi cộng đồng **KẾT NỐI - Business Community**. Bản quyền bảo lưu.

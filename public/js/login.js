@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const toggleBtn = document.getElementById('btnTogglePassword');
   const pwdInput = document.getElementById('adminPasswordInput');
   const eyeIcon = document.getElementById('eyeIcon');
-  const autoFillBtn = document.getElementById('btnAutoFillDemo');
   const loginInput = document.getElementById('adminLoginInput');
   const loginForm = document.getElementById('adminLoginForm');
   const alertBox = document.getElementById('loginAlert');
@@ -26,16 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
         pwdInput.type = 'password';
         if (eyeIcon) eyeIcon.className = 'fa-solid fa-eye';
       }
-    });
-  }
-
-  // Điền nhanh tài khoản demo
-  if (autoFillBtn && loginInput && pwdInput) {
-    autoFillBtn.addEventListener('click', function () {
-      loginInput.value = 'adminnnnn@gmail.com';
-      pwdInput.value = 'admin123';
-      if (alertBox) alertBox.style.display = 'none';
-      loginInput.focus();
     });
   }
 
