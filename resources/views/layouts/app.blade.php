@@ -6,7 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @if(app()->environment('production'))
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    @endif
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="asset-url" content="{{ asset('') }}">
     <script src="{{ asset('js/theme-init.js') }}"></script>
