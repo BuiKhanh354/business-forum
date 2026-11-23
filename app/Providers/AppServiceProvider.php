@@ -60,6 +60,14 @@ class AppServiceProvider extends ServiceProvider
 
                 if (Schema::hasTable('users')) {
                     $authorUser = User::first();
+                    if (!$authorUser) {
+                        $authorUser = new User([
+                            'name' => 'Bùi Viết Khánh',
+                            'avatar' => 'assets/images/admin-khanh.jpg',
+                            'role_title' => 'Founder & Ban Quản trị',
+                            'bio' => 'Chia sẻ chiến lược kinh doanh, quản trị dòng tiền và đầu tư tài chính.',
+                        ]);
+                    }
                     $view->with('authorUser', $authorUser);
                     $currentUser = Auth::user();
                     $view->with('currentUser', $currentUser);

@@ -148,11 +148,11 @@
         <!-- THÔNG TIN TÀI KHOẢN ADMIN ĐÃ ĐĂNG NHẬP -->
         <a href="{{ route('admin.profile') }}" style="display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: inherit;" title="Hồ sơ quản trị viên">
             <div class="topbar-avatar" style="border-radius: 5px; overflow: hidden; width: 34px; height: 34px;">
-                <img id="topbarAvatarImg" src="{{ asset($currentUser->avatar ?? 'assets/images/admin-khanh.jpg') }}" alt="Avatar Admin" style="width: 100%; height: 100%; object-fit: cover;">
+                <img id="topbarAvatarImg" src="{{ asset($currentUser?->avatar ?? 'assets/images/admin-khanh.jpg') }}" alt="Avatar Admin" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
             <div class="topbar-user-info" style="display: flex; flex-direction: column; line-height: 1.2;">
-                <span class="topbar-user-name" style="font-size: 0.84rem; font-weight: 800; color: var(--text-title);">{{ $currentUser->name ?? 'Admin' }}</span>
-                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">{{ $currentUser->role_title ?? 'Quản trị viên' }}</span>
+                <span class="topbar-user-name" style="font-size: 0.84rem; font-weight: 800; color: var(--text-title);">{{ $currentUser?->name ?? 'Admin' }}</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">{{ $currentUser?->role_title ?? 'Quản trị viên' }}</span>
             </div>
         </a>
 

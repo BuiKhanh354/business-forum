@@ -30,13 +30,13 @@
     <article class="post-card" style="padding: 2rem;">
       <div class="post-header-author">
         <div class="author-circle-avatar" style="overflow: hidden; border: 2px solid var(--gold-accent);">
-          <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser->name ?? $currentUser->name ?? 'Admin' }}" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? $currentUser?->name ?? 'Admin' }}" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div class="author-meta-info">
           <div class="author-name-row">
-            <span class="author-name-text">{{ $authorUser->name ?? $currentUser->name ?? 'Admin' }}</span>
+            <span class="author-name-text">{{ $authorUser?->name ?? $currentUser?->name ?? 'Admin' }}</span>
             <i class="fa-solid fa-circle-check median-verified-check" title="Quản trị viên đã xác minh"></i>
-            <span class="badge-role-admin">{{ strtoupper($authorUser->role_title ?? $currentUser->role_title ?? 'FOUNDER & ADMIN') }}</span>
+            <span class="badge-role-admin">{{ strtoupper($authorUser?->role_title ?? $currentUser?->role_title ?? 'FOUNDER & ADMIN') }}</span>
           </div>
           <span class="post-time-text">{{ $post->created_at->format('d/m/Y - H:i') }} &bull; {{ $post->reading_time }} phút đọc &bull; Báo cáo & Góc nhìn Quản trị</span>
         </div>
@@ -266,9 +266,9 @@
                 <div class="author-liked-badge" 
                      id="authorHeartBadge-{{ $comment->id }}" 
                      style="{{ $isAuthorLiked ? 'display: inline-flex;' : 'display: none;' }}" 
-                     title="Bình luận này đã được tác giả ({{ $authorUser->name ?? 'Admin' }}) thả tim">
+                     title="Bình luận này đã được tác giả ({{ $authorUser?->name ?? 'Admin' }}) thả tim">
                   <div class="author-liked-avatar-wrap">
-                    <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="Tác giả">
+                    <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="Tác giả">
                     <i class="fa-solid fa-heart badge-heart-icon"></i>
                   </div>
                   <span>Tác giả đã thích</span>
@@ -292,15 +292,15 @@
       <div class="median-author-widget">
         <div class="median-author-cover" style="background-image: url('{{ asset($siteSettings['cover_desktop'] ?? 'assets/images/cover-banner.jpg') }}'); background-size: cover; background-position: center; height: 54px; margin: -1.15rem -1.15rem 0 -1.15rem;"></div>
         <div class="median-author-avatar-wrap">
-          <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser->name ?? 'Admin Khánh' }}">
+          <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? 'Admin Khánh' }}">
         </div>
         <div class="median-author-name">
-          <span>{{ $authorUser->name ?? 'Bùi Viết Khánh' }}</span>
+          <span>{{ $authorUser?->name ?? 'Bùi Viết Khánh' }}</span>
           <i class="fa-solid fa-circle-check median-verified-check" title="Quản trị viên đã xác minh"></i>
         </div>
-        <div class="median-author-role">{{ strtoupper($authorUser->role_title ?? 'FOUNDER & QUẢN TRỊ VIÊN') }}</div>
+        <div class="median-author-role">{{ strtoupper($authorUser?->role_title ?? 'FOUNDER & QUẢN TRỊ VIÊN') }}</div>
         <div class="median-author-bio">
-          {{ \Illuminate\Support\Str::limit($authorUser->bio ?? 'Chia sẻ chiến lược quản trị, tài chính và góc nhìn điều hành thực chiến.', 115) }}
+          {{ \Illuminate\Support\Str::limit($authorUser?->bio ?? 'Chia sẻ chiến lược quản trị, tài chính và góc nhìn điều hành thực chiến.', 115) }}
         </div>
 
         <!-- Thống kê năng lực -->

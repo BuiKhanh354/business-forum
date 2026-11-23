@@ -126,13 +126,13 @@
                 <!-- Header: Tác giả Admin chuẩn Blog (Đồng bộ theo hồ sơ cá nhân) -->
                 <div class="post-header-author">
                   <div class="topbar-avatar" style="width: 38px; height: 38px; border-radius: 5px; overflow: hidden;">
-                    <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser->name ?? $currentUser->name ?? 'Admin' }}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? $currentUser?->name ?? 'Admin' }}" style="width: 100%; height: 100%; object-fit: cover;">
                   </div>
                   <div class="author-meta-info">
                     <div class="author-name-row">
-                      <span class="author-name-text">{{ $authorUser->name ?? $currentUser->name ?? 'Admin' }}</span>
+                      <span class="author-name-text">{{ $authorUser?->name ?? $currentUser?->name ?? 'Admin' }}</span>
                       <i class="fa-solid fa-circle-check median-verified-check" title="Quản trị viên đã xác minh"></i>
-                      <span class="badge-role-admin">{{ strtoupper($authorUser->role_title ?? $currentUser->role_title ?? 'FOUNDER') }}</span>
+                      <span class="badge-role-admin">{{ strtoupper($authorUser?->role_title ?? $currentUser?->role_title ?? 'FOUNDER') }}</span>
                     </div>
                     <span class="post-time-text">{{ $post->created_at->format('d/m/Y') }} &bull; {{ $post->reading_time }} phút đọc &bull; Góc nhìn Quản trị</span>
                   </div>
@@ -328,15 +328,15 @@
             <div class="median-author-widget">
               <div class="median-author-cover" style="background-image: url('{{ asset($siteSettings['cover_desktop'] ?? 'assets/images/cover-banner.jpg') }}'); background-size: cover; background-position: center; height: 54px; margin: -1.15rem -1.15rem 0 -1.15rem;"></div>
               <div class="median-author-avatar-wrap">
-                <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser->name ?? 'Admin Khánh' }}">
+                <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? 'Admin Khánh' }}">
               </div>
               <div class="median-author-name">
-                <span>{{ $authorUser->name ?? 'Bùi Viết Khánh' }}</span>
+                <span>{{ $authorUser?->name ?? 'Bùi Viết Khánh' }}</span>
                 <i class="fa-solid fa-circle-check median-verified-check" title="Quản trị viên đã xác minh"></i>
               </div>
-              <div class="median-author-role">{{ strtoupper($authorUser->role_title ?? 'FOUNDER & QUẢN TRỊ VIÊN') }}</div>
+              <div class="median-author-role">{{ strtoupper($authorUser?->role_title ?? 'FOUNDER & QUẢN TRỊ VIÊN') }}</div>
               <div class="median-author-bio">
-                {{ \Illuminate\Support\Str::limit($authorUser->bio ?? 'Chia sẻ chiến lược quản trị, tài chính và góc nhìn điều hành thực chiến.', 115) }}
+                {{ \Illuminate\Support\Str::limit($authorUser?->bio ?? 'Chia sẻ chiến lược quản trị, tài chính và góc nhìn điều hành thực chiến.', 115) }}
               </div>
 
               <!-- Thống kê năng lực -->
