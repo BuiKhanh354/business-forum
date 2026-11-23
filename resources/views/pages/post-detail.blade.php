@@ -147,10 +147,11 @@
         <div class="attached-preview-box">
           <a href="{{ $fullUrl }}" target="_blank" rel="noopener noreferrer" class="preview-thumb-img-wrap" style="display: block; text-decoration: none;" title="{{ $linkTitle }}">
             @php
-              $extArticleImg = $post->external_article_image;
+              $extArticleImg = $post->external_link_image ?: ($post->external_article_image ?: '');
+              $extImgSrc = !empty($extArticleImg) ? (\Illuminate\Support\Str::startsWith($extArticleImg, ['http://', 'https://']) ? $extArticleImg : asset($extArticleImg)) : '';
             @endphp
-            @if(!empty($extArticleImg))
-              <img src="{{ $extArticleImg }}" alt="{{ $linkTitle }}" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            @if(!empty($extImgSrc))
+              <img src="{{ $extImgSrc }}" alt="{{ $linkTitle }}" onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="preview-fallback-icon" style="display: none;">
                 <i class="fa-solid fa-newspaper"></i>
                 <span>{{ strtoupper($cleanDomain) }}</span>

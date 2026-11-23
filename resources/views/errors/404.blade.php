@@ -333,9 +333,6 @@
 
         <!-- SỐ 404 GRADIENT -->
         <div class="error-num">404</div>
-        <div class="error-icon-badge">
-            <i class="fa-solid fa-compass-drafting"></i>
-        </div>
 
         <!-- TIÊU ĐỀ & MÔ TẢ -->
         <h1 class="error-title">Không tìm thấy trang bạn yêu cầu</h1>
