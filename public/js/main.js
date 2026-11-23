@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // 7. Đồng bộ trạng thái Thích bài viết từ localStorage (nếu có)
   try {
-    const localLikes = JSON.parse(localStorage.getItem('vlog_liked_posts') || '[]');
+    const localLikes = JSON.parse(localStorage.getItem('business_forum_liked_posts') || localStorage.getItem('vlog_liked_posts') || '[]');
     if (Array.isArray(localLikes)) {
       localLikes.forEach(function (id) {
         document.querySelectorAll('.like-btn[data-post-id="' + id + '"]').forEach(function (btn) {
@@ -427,7 +427,7 @@ window.togglePostLike = function (postId, btn) {
 
       let localLikes = [];
       try {
-        localLikes = JSON.parse(localStorage.getItem('vlog_liked_posts') || '[]');
+        localLikes = JSON.parse(localStorage.getItem('business_forum_liked_posts') || localStorage.getItem('vlog_liked_posts') || '[]');
       } catch (e) {
         localLikes = [];
       }
@@ -462,7 +462,7 @@ window.togglePostLike = function (postId, btn) {
         localLikes = localLikes.filter(function (id) { return id != postId; });
       }
       try {
-        localStorage.setItem('vlog_liked_posts', JSON.stringify(localLikes));
+        localStorage.setItem('business_forum_liked_posts', JSON.stringify(localLikes));
       } catch (e) {}
     }
   })
