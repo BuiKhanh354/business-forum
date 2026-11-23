@@ -361,20 +361,7 @@
       </div>
       @endif
 
-      <!-- CHỦ ĐỀ PHỔ BIẾN TỪ DATABASE -->
-      <div class="widget-card">
-        <h4 class="widget-card-title">Chuyên mục bài viết</h4>
-        <div class="popular-tags-list">
-          @if(isset($globalCategories) && count($globalCategories) > 0)
-            @foreach($globalCategories as $gCat)
-              <a href="{{ route('home') }}?cat={{ $gCat->slug }}" class="tag-badge" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; margin-bottom: 0.4rem; padding: 0.35rem 0.65rem; border-radius: 9999px; background: rgba(37,99,235,0.08); color: {{ $gCat->color ?? '#2563eb' }}; border: 1px solid {{ $gCat->color ?? '#2563eb' }}33; font-weight: 700; font-size: 0.78rem;">
-                <span>{{ $gCat->name }}</span>
-                <span style="font-size: 0.72rem; opacity: 0.85;">{{ $gCat->posts_count }}</span>
-              </a>
-            @endforeach
-          @endif
-        </div>
-      </div>
+
     </aside>
 
   </div>
