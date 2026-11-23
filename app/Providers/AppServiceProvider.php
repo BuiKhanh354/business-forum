@@ -39,6 +39,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Ép HTTPS cho toàn bộ assets (CSS, JS, Image) khi chạy trên môi trường production
+        if (config('app.env') === 'production' || request()->header('X-Forwarded-Proto') === 'https') {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
+
         // Thiết lập ngôn ngữ thời gian tiếng Việt (ví dụ: 5 phút trước, 2 giờ trước)
         Carbon::setLocale('vi');
 
