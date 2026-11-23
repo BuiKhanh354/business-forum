@@ -197,6 +197,50 @@ class BlogController extends Controller
     }
 
     /**
+     * Thích / Bỏ thích bình luận ngoài trang bài viết
+     */
+    public function toggleCommentLike($id)
+    {
+        $comment = \App\Models\Comment::findOrFail($id);
+        $likedComments = session()->get('liked_comments', []);
+        $isAdmin = auth()->check();
+
+        if ($isAdmin) {
+            // Nếu là Tác giả/Admin đang đăng nhập thì toggle trạng thái likes_count của tác giả
+            $isLiked = $comment->likes_count > 0;
+            $comment->likes_count = $isLiked ? 0 : 1;
+            $comment->save();
+            $userLiked = $comment->likes_count > 0;
+            $authorLiked = $comment->likes_count > 0;
+        } else {
+            // Độc giả thông thường
+            if (in_array($comment->id, $likedComments)) {
+                $comment->decrement('likes_count');
+                if ($comment->likes_count < 0) {
+                    $comment->likes_count = 0;
+                    $comment->save();
+                }
+                $likedComments = array_values(array_diff($likedComments, [$comment->id]));
+                $userLiked = false;
+            } else {
+                $comment->increment('likes_count');
+                $likedComments[] = $comment->id;
+                $userLiked = true;
+            }
+            session()->put('liked_comments', $likedComments);
+            $authorLiked = $comment->likes_count > 0;
+        }
+
+        return response()->json([
+            'success'      => true,
+            'is_liked'     => $userLiked,
+            'likes_count'  => $comment->likes_count,
+            'author_liked' => $authorLiked,
+            'is_admin'     => $isAdmin,
+        ]);
+    }
+
+    /**
      * Gửi tin nhắn / Thư ngỏ riêng cho Founder Admin từ trang Về tôi
      */
     public function submitQuickMessage(Request $request)

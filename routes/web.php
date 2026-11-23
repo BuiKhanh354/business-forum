@@ -18,6 +18,7 @@ Route::get('/ve-toi', [BlogController::class, 'about'])->name('about');
 Route::get('/bai-viet/{id?}', [BlogController::class, 'postDetail'])->name('post.detail');
 Route::post('/bai-viet/{id}/thich', [BlogController::class, 'togglePostLike'])->name('post.like');
 Route::post('/bai-viet/{id}/binh-luan', [BlogController::class, 'storeComment'])->name('post.comment');
+Route::post('/binh-luan/{id}/thich', [BlogController::class, 'toggleCommentLike'])->name('comment.like');
 Route::get('/lien-he', [BlogController::class, 'contact'])->name('contact');
 Route::post('/lien-he', [BlogController::class, 'submitProposal'])->name('contact.submit');
 Route::post('/tin-nhan-rieng', [BlogController::class, 'submitQuickMessage'])->name('quick.message');

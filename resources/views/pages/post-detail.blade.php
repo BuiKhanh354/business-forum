@@ -231,8 +231,15 @@
 
         <!-- Danh sách bình luận thực tế từ Database -->
         <div id="commentsList" style="display: flex; flex-direction: column; gap: 1rem;">
+          @php
+            $sessionLikedComments = session('liked_comments', []);
+          @endphp
           @forelse($post->comments as $comment)
-          <div style="display: flex; gap: 0.75rem; background: #f8fafc; padding: 1rem; border-radius: 8px; border: 1px solid #f1f5f9;">
+          @php
+            $isCommentLiked = in_array($comment->id, $sessionLikedComments) || (($comment->likes_count ?? 0) > 0);
+            $isAuthorLiked = ($comment->likes_count ?? 0) > 0;
+          @endphp
+          <div class="comment-item-card" id="comment-item-{{ $comment->id }}" style="display: flex; gap: 0.75rem; background: var(--bg-subtle); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-light); transition: all 0.2s ease;">
             <div class="author-circle-avatar" style="width: 36px; height: 36px; font-size: 0.78rem; background: #e2e8f0; color: #475569; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;">
               {{ mb_strtoupper(mb_substr($comment->author_name, 0, 2, 'UTF-8'), 'UTF-8') }}
             </div>
@@ -241,7 +248,32 @@
                 <div style="font-size: 0.88rem; font-weight: 700; color: var(--text-title);">{{ $comment->author_name }}</div>
                 <div style="font-size: 0.74rem; color: var(--text-light-muted);">{{ $comment->created_at->diffForHumans() }}</div>
               </div>
-              <p style="font-size: 0.88rem; color: var(--text-body); line-height: 1.5; margin: 0;">{{ $comment->content }}</p>
+              <p style="font-size: 0.88rem; color: var(--text-body); line-height: 1.5; margin: 0 0 0.5rem 0;">{{ $comment->content }}</p>
+
+              <!-- THANH TƯƠNG TÁC: NÚT THẢ TIM & HUY HIỆU TÁC GIẢ ĐÃ THÍCH -->
+              <div class="comment-actions-bar" style="display: flex; align-items: center; gap: 0.65rem; flex-wrap: wrap;">
+                {{-- Nút Thích bình luận --}}
+                <button type="button" 
+                        class="btn-comment-like {{ $isCommentLiked ? 'liked' : '' }}" 
+                        data-comment-id="{{ $comment->id }}"
+                        onclick="toggleCommentLikeFront({{ $comment->id }}, this)" 
+                        title="{{ $isCommentLiked ? 'Bỏ thích bình luận' : 'Thích bình luận' }}">
+                  <i class="{{ $isCommentLiked ? 'fa-solid' : 'fa-regular' }} fa-heart"></i>
+                  <span class="comment-like-count">{{ ($comment->likes_count ?? 0) > 0 ? $comment->likes_count : '' }}</span>
+                </button>
+
+                {{-- Huy hiệu Tác giả đã thích --}}
+                <div class="author-liked-badge" 
+                     id="authorHeartBadge-{{ $comment->id }}" 
+                     style="{{ $isAuthorLiked ? 'display: inline-flex;' : 'display: none;' }}" 
+                     title="Bình luận này đã được tác giả ({{ $authorUser->name ?? 'Admin' }}) thả tim">
+                  <div class="author-liked-avatar-wrap">
+                    <img src="{{ asset(($authorUser->avatar ?? $currentUser->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="Tác giả">
+                    <i class="fa-solid fa-heart badge-heart-icon"></i>
+                  </div>
+                  <span>Tác giả đã thích</span>
+                </div>
+              </div>
             </div>
           </div>
           @empty
