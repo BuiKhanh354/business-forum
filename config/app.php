@@ -122,7 +122,9 @@ return [
     |
     */
 
-    'key' => env('APP_KEY'),
+    'key' => (strlen(env('APP_KEY', '')) >= 32 || str_starts_with(env('APP_KEY', ''), 'base64:')) 
+        ? env('APP_KEY') 
+        : 'base64:jcJGVpVCd3zAXsjr/lFMk4vHfJfTekSnq/FRJXfneW0=',
 
     'cipher' => 'AES-256-CBC',
 
