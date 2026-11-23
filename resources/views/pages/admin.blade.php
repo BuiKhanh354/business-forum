@@ -200,14 +200,18 @@
                                     <i class="fa-solid fa-pen"></i> Sửa
                                 </button>
 
-                                <!-- Nút Xóa -->
-                                <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bài viết \'{{ $post->title }}\'?');" style="margin: 0; display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" style="background: none; border: none; color: #ef4444; font-weight: 600; font-size: 0.82rem; cursor: pointer; padding: 0.25rem 0.45rem;" title="Xóa bài viết">
-                                        <i class="fa-solid fa-trash-can"></i> Xóa
-                                    </button>
-                                </form>
+                                <!-- Nút Xóa: Mở Popup Modal Xác nhận Xóa bài viết -->
+                                <button type="button" class="btn-delete-post-trigger" onclick="openDeletePostModal(this)"
+                                    data-id="{{ $post->id }}"
+                                    data-title="{{ $post->title }}"
+                                    data-category="{{ $post->category ?? 'Chưa phân loại' }}"
+                                    data-views="{{ $post->views_count ?? 0 }}"
+                                    data-comments-count="{{ $post->comments_count ?? 0 }}"
+                                    data-delete-url="{{ route('admin.posts.destroy', $post->id) }}"
+                                    style="background: none; border: none; color: #ef4444; font-weight: 600; font-size: 0.82rem; cursor: pointer; padding: 0.25rem 0.45rem;"
+                                    title="Xóa bài viết">
+                                    <i class="fa-solid fa-trash-can"></i> Xóa
+                                </button>
                             </div>
                         </td>
                     </tr>
@@ -604,6 +608,69 @@
           </button>
           <button type="submit" class="btn btn-primary" style="background-color: var(--executive-blue); border: none; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.35rem; border-radius: 6px; display: flex; align-items: center; gap: 0.45rem;">
             <i class="fa-solid fa-check"></i> Cập nhật thay đổi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================================
+     MODAL POPUP: XÁC NHẬN XÓA BÀI VIẾT (GIAO DIỆN CHUYÊN NGHIỆP)
+     ====================================================================== -->
+<div class="modal fade" id="deletePostModal" tabindex="-1" aria-labelledby="deletePostModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 480px; width: 92%;">
+    <div class="modal-content" style="border-radius: 14px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); background-color: var(--bg-card, #ffffff); overflow: hidden;">
+      
+      <!-- Modal Header -->
+      <div class="modal-header" style="border-bottom: 1px solid var(--border-card, #f1f5f9); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(239, 68, 68, 0.12); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; border: 1px solid rgba(239, 68, 68, 0.2);">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h5 class="modal-title" id="deletePostModalLabel" style="font-size: 1.05rem; font-weight: 800; color: var(--text-title, #0f172a); margin: 0;">
+              Xác nhận xóa bài viết
+            </h5>
+            <p style="font-size: 0.75rem; color: var(--text-muted, #64748b); margin: 0;">
+              Thao tác này sẽ gỡ bài viết vĩnh viễn khỏi diễn đàn
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" data-bs-dismiss="modal" onclick="closeModal('deletePostModal')" aria-label="Đóng" style="background: none; border: none; color: var(--text-muted); font-size: 1.15rem; cursor: pointer; padding: 0.35rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; line-height: 1;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Form Xác nhận Xóa -->
+      <form id="deletePostForm" action="" method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-body" style="padding: 1.5rem;">
+          <p style="font-size: 0.92rem; color: var(--text-body, #1e293b); line-height: 1.6; margin: 0 0 0.85rem 0;">
+            Bạn có chắc chắn muốn xóa bài viết sau?
+          </p>
+
+          <div style="background: var(--bg-subtle, #f8fafc); border: 1px solid var(--border-card, #e2e8f0); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
+            <div id="deletePostTitleTarget" style="font-size: 0.92rem; font-weight: 800; color: #ef4444; line-height: 1.5; margin-bottom: 0.45rem;"></div>
+            <div id="deletePostMetaTarget" style="display: flex; gap: 0.85rem; font-size: 0.76rem; color: var(--text-muted); flex-wrap: wrap;"></div>
+          </div>
+
+          <div style="background: rgba(239, 68, 68, 0.05); border: 1px dashed rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 0.75rem 1rem; display: flex; align-items: flex-start; gap: 0.65rem;">
+            <i class="fa-solid fa-circle-exclamation" style="color: #ef4444; font-size: 0.95rem; margin-top: 0.15rem; flex-shrink: 0;"></i>
+            <span style="font-size: 0.78rem; color: var(--text-muted, #64748b); line-height: 1.45;">
+              Bài viết cùng toàn bộ bình luận liên quan sẽ bị xóa khỏi hệ thống và <strong>không thể hoàn tác</strong>.
+            </span>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer" style="border-top: 1px solid var(--border-card, #f1f5f9); padding: 1rem 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem; background: var(--bg-subtle, #f8fafc);">
+          <button type="button" class="btn" onclick="closeModal('deletePostModal')" data-bs-dismiss="modal" style="font-size: 0.85rem; font-weight: 600; padding: 0.55rem 1.15rem; border-radius: 6px; color: var(--text-muted, #64748b); background: var(--bg-card, #ffffff); border: 1px solid var(--border-card, #cbd5e1); cursor: pointer; transition: all 0.2s;">
+            Hủy bỏ
+          </button>
+          <button type="submit" class="btn" style="background-color: #ef4444; border: none; color: #ffffff; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.35rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); transition: background-color 0.2s;">
+            <i class="fa-solid fa-trash-can"></i> Xác nhận xóa
           </button>
         </div>
       </form>

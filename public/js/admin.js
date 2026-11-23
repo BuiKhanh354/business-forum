@@ -101,6 +101,32 @@
         openModal('editPostModal');
     };
 
+    // Hàm mở popup Xác nhận Xóa bài viết và đổ dữ liệu
+    window.openDeletePostModal = function(btn) {
+        if (!btn) return;
+        const deleteUrl = btn.getAttribute('data-delete-url');
+        const title = btn.getAttribute('data-title');
+        const category = btn.getAttribute('data-category');
+        const views = btn.getAttribute('data-views') || '0';
+        const commentsCount = btn.getAttribute('data-comments-count') || '0';
+
+        const form = document.getElementById('deletePostForm');
+        const titleTarget = document.getElementById('deletePostTitleTarget');
+        const metaTarget = document.getElementById('deletePostMetaTarget');
+
+        if (form) form.action = deleteUrl;
+        if (titleTarget) titleTarget.textContent = title || 'Bài viết';
+        if (metaTarget) {
+            metaTarget.innerHTML = `
+                <span style="display: inline-flex; align-items: center; gap: 0.35rem;"><i class="fa-solid fa-folder" style="color: var(--executive-blue);"></i> ${category || 'Chưa phân loại'}</span>
+                <span style="display: inline-flex; align-items: center; gap: 0.35rem;"><i class="fa-regular fa-eye"></i> ${views} lượt xem</span>
+                <span style="display: inline-flex; align-items: center; gap: 0.35rem;"><i class="fa-regular fa-comment"></i> ${commentsCount} bình luận</span>
+            `;
+        }
+
+        openModal('deletePostModal');
+    };
+
     // Hàm hiển thị xem trước danh sách nhiều ảnh tải lên từ máy tính (Tối đa 5 ảnh)
     window.handleMultiSelect = function(input, previewBoxId, dropContentId, gridId, countBadgeId) {
         if (!input.files || input.files.length === 0) return;
