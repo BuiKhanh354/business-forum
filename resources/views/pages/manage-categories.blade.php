@@ -65,14 +65,6 @@
                     </div>
                 </div>
 
-                <!-- Mô tả ngắn -->
-                <div style="margin-bottom: 1.5rem;">
-                    <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-title); margin-bottom: 0.4rem;">
-                        Mô tả tóm tắt (Tùy chọn)
-                    </label>
-                    <textarea name="description" rows="3" placeholder="Giới thiệu định hướng nội dung của chuyên đề này..." style="width: 100%; background: var(--bg-subtle); border: 1px solid var(--border-card); border-radius: 6px; padding: 0.65rem 0.85rem; font-size: 0.86rem; outline: none; font-family: var(--font-family); color: var(--text-title); resize: vertical;"></textarea>
-                </div>
-
                 <!-- Nút lưu -->
                 <button type="submit" class="btn-publish-trigger" style="width: 100%; background-color: var(--executive-blue); justify-content: center; height: 42px; font-size: 0.9rem; font-weight: 700; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; border: none; color: #fff;">
                     <i class="fa-solid fa-plus"></i> Tạo danh mục ngay
@@ -113,9 +105,6 @@
                                         <span style="width: 12px; height: 12px; border-radius: 50%; background-color: {{ $cat->color }}; flex-shrink: 0; box-shadow: 0 0 0 1px rgba(0,0,0,0.1);"></span>
                                         <div>
                                             <div style="font-weight: 700; color: var(--text-title);">{{ $cat->name }}</div>
-                                            @if($cat->description)
-                                                <div style="font-size: 0.76rem; color: var(--text-muted); max-width: 250px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $cat->description }}</div>
-                                            @endif
                                         </div>
                                     </div>
                                 </td>
@@ -272,14 +261,6 @@
               <button type="button" class="edit-cat-color-choice" data-color="#e11d48" style="width: 24px; height: 24px; border-radius: 50%; background: #e11d48; border: 2px solid #fff; box-shadow: 0 0 0 1px #cbd5e1; cursor: pointer;" title="Rose Red"></button>
               <button type="button" class="edit-cat-color-choice" data-color="#0891b2" style="width: 24px; height: 24px; border-radius: 50%; background: #0891b2; border: 2px solid #fff; box-shadow: 0 0 0 1px #cbd5e1; cursor: pointer;" title="Cyan Deep"></button>
             </div>
-          </div>
-
-          <!-- Mô tả ngắn -->
-          <div>
-            <label style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-title); margin-bottom: 0.45rem;">
-              Mô tả ngắn chuyên mục (Không bắt buộc)
-            </label>
-            <textarea id="editCategoryDescription" name="description" rows="3" placeholder="Định hướng thảo luận của chuyên đề..." style="width: 100%; padding: 0.65rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.86rem; outline: none;"></textarea>
           </div>
 
         </div>

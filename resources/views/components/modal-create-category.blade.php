@@ -52,14 +52,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Mô tả định hướng -->
-          <div>
-            <label for="catModalDescInput" style="display: block; font-size: 0.82rem; font-weight: 700; color: var(--text-title, #0f172a); margin-bottom: 0.45rem;">
-              Mô tả ngắn chuyên mục (Không bắt buộc)
-            </label>
-            <textarea id="catModalDescInput" name="description" rows="2" placeholder="Tóm tắt nội dung và định hướng bài viết trong danh mục..." style="width: 100%; padding: 0.6rem 0.85rem; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 0.85rem; outline: none; background: var(--bg-card, #ffffff); color: var(--text-title, #0f172a); transition: border-color 0.2s;"></textarea>
-          </div>
         </div>
 
         <div class="modal-footer" style="border-top: 1px solid var(--border-light, #f1f5f9); padding: 1rem 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
