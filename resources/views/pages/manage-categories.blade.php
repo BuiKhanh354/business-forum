@@ -126,14 +126,17 @@
                                         <i class="fa-solid fa-pen"></i> Sửa
                                     </button>
 
-                                    <!-- NÚT XÓA DANH MỤC -->
-                                    <form action="{{ route('admin.categories.destroy', $cat->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa danh mục \'{{ $cat->name }}\'?');" style="display: inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="cat-pill" style="font-size: 0.76rem; padding: 0.35rem 0.65rem; color: #ef4444; border-color: #fecaca; background: #fff5f5; cursor: pointer;" title="Xóa danh mục">
-                                            <i class="fa-solid fa-trash-can"></i> Xóa
-                                        </button>
-                                    </form>
+                                    <!-- NÚT XÓA DANH MỤC: MỞ MODAL XÁC NHẬN -->
+                                    <button type="button" class="cat-pill btn-delete-category-trigger"
+                                        onclick="openDeleteCategoryModal(this)"
+                                        data-id="{{ $cat->id }}"
+                                        data-name="{{ $cat->name }}"
+                                        data-posts-count="{{ $cat->posts_count ?? 0 }}"
+                                        data-delete-url="{{ route('admin.categories.destroy', $cat->id) }}"
+                                        style="font-size: 0.76rem; padding: 0.35rem 0.65rem; color: #ef4444; border-color: #fecaca; background: #fff5f5; cursor: pointer;"
+                                        title="Xóa danh mục">
+                                        <i class="fa-solid fa-trash-can"></i> Xóa
+                                    </button>
                                 </td>
                             </tr>
                         @empty
@@ -267,6 +270,67 @@
           </button>
           <button type="submit" class="btn btn-primary" style="background-color: var(--executive-blue); border: none; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.35rem; border-radius: 6px; display: flex; align-items: center; gap: 0.45rem;">
             <i class="fa-solid fa-check"></i> Lưu thay đổi
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================================
+     MODAL POPUP: XÁC NHẬN XÓA DANH MỤC (POPUP GIAO DIỆN CHUYÊN NGHIỆP)
+     ====================================================================== -->
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" aria-labelledby="deleteCategoryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 460px; width: 92%;">
+    <div class="modal-content" style="border-radius: 14px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); background-color: var(--bg-card, #ffffff); overflow: hidden;">
+      
+      <!-- Modal Header -->
+      <div class="modal-header" style="border-bottom: 1px solid var(--border-card, #f1f5f9); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(239, 68, 68, 0.12); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; border: 1px solid rgba(239, 68, 68, 0.2);">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h5 class="modal-title" id="deleteCategoryModalLabel" style="font-size: 1.05rem; font-weight: 800; color: var(--text-title, #0f172a); margin: 0;">
+              Xác nhận xóa danh mục
+            </h5>
+            <p style="font-size: 0.75rem; color: var(--text-muted, #64748b); margin: 0;">
+              Thao tác này sẽ gỡ bỏ danh mục khỏi hệ thống
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" data-bs-dismiss="modal" onclick="closeModal('deleteCategoryModal')" aria-label="Đóng" style="background: none; border: none; color: var(--text-muted); font-size: 1.15rem; cursor: pointer; padding: 0.35rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; line-height: 1;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Form Xác nhận Xóa -->
+      <form id="deleteCategoryForm" action="" method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-body" style="padding: 1.5rem;">
+          <p style="font-size: 0.92rem; color: var(--text-title, #1e293b); line-height: 1.6; margin: 0 0 1rem 0;">
+            Bạn có chắc chắn muốn xóa danh mục <span id="deleteCategoryNameTarget" style="font-weight: 800; color: #ef4444; background: rgba(239, 68, 68, 0.08); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.2); display: inline-block;"></span>?
+          </p>
+
+          <!-- Cảnh báo nếu danh mục có bài viết liên kết -->
+          <div id="deleteCategoryPostWarning" style="display: none; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); color: #d97706; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.82rem; line-height: 1.5; margin-bottom: 0.85rem;"></div>
+
+          <div style="background: var(--bg-subtle, #f8fafc); border: 1px dashed var(--border-card, #e2e8f0); border-radius: 8px; padding: 0.75rem 1rem; display: flex; align-items: flex-start; gap: 0.65rem;">
+            <i class="fa-solid fa-shield-halved" style="color: var(--executive-blue, #2563eb); font-size: 0.95rem; margin-top: 0.15rem; flex-shrink: 0;"></i>
+            <span style="font-size: 0.78rem; color: var(--text-muted, #64748b); line-height: 1.45;">
+              Các bài viết thuộc danh mục này sẽ tự động chuyển về trạng thái <strong>Chưa phân loại</strong> để đảm bảo không bị thất thoát dữ liệu.
+            </span>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer" style="border-top: 1px solid var(--border-card, #f1f5f9); padding: 1rem 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem; background: var(--bg-subtle, #f8fafc);">
+          <button type="button" class="btn" onclick="closeModal('deleteCategoryModal')" data-bs-dismiss="modal" style="font-size: 0.85rem; font-weight: 600; padding: 0.55rem 1.15rem; border-radius: 6px; color: var(--text-muted, #64748b); background: var(--bg-card, #ffffff); border: 1px solid var(--border-card, #cbd5e1); cursor: pointer; transition: all 0.2s;">
+            Hủy bỏ
+          </button>
+          <button type="submit" class="btn" style="background-color: #ef4444; border: none; color: #ffffff; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.35rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); transition: background-color 0.2s;">
+            <i class="fa-solid fa-trash-can"></i> Xác nhận xóa
           </button>
         </div>
       </form>

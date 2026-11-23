@@ -43,6 +43,33 @@
         openModal('editCategoryModal');
     };
 
+    // Hàm mở popup Xác nhận Xóa danh mục và đổ dữ liệu
+    window.openDeleteCategoryModal = function(btn) {
+        if (!btn) return;
+        const deleteUrl = btn.getAttribute('data-delete-url');
+        const name = btn.getAttribute('data-name');
+        const postsCount = btn.getAttribute('data-posts-count') || '0';
+
+        const form = document.getElementById('deleteCategoryForm');
+        const nameTarget = document.getElementById('deleteCategoryNameTarget');
+        const warningBox = document.getElementById('deleteCategoryPostWarning');
+
+        if (form) form.action = deleteUrl;
+        if (nameTarget) nameTarget.textContent = name || 'này';
+
+        if (warningBox) {
+            const count = parseInt(postsCount) || 0;
+            if (count > 0) {
+                warningBox.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color: #d97706; margin-right: 6px;"></i> Danh mục này hiện đang liên kết với <strong>' + count + ' bài viết</strong>. Sau khi xóa, các bài viết sẽ được chuyển về trạng thái <em>Chưa phân loại</em>.';
+                warningBox.style.display = 'block';
+            } else {
+                warningBox.style.display = 'none';
+            }
+        }
+
+        openModal('deleteCategoryModal');
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
         // 1. Color picker ở form tạo mới
         const picker = document.getElementById('categoryColorPicker');
