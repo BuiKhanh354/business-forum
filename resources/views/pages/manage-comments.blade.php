@@ -154,14 +154,19 @@
                 <i class="{{ ($comment->likes_count ?? 0) > 0 ? 'fa-solid' : 'fa-regular' }} fa-heart" style="color: #e11d48; margin-right: 2px;"></i>
                 <span class="like-btn-label">{{ ($comment->likes_count ?? 0) > 0 ? 'Đã thích' : 'Thích' }}</span>
               </button>
-              <!-- XOÁ -->
-              <form action="{{ route('admin.comments.destroy', $comment->id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn xóa bình luận này?');" style="display: inline; margin: 0;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-action-delete cat-pill" style="padding: 0.35rem 0.65rem; font-size: 0.78rem; font-weight: 700; color: #dc2626; border-color: #fecaca; background: none; cursor: pointer;" title="Xóa bình luận">
-                  <i class="fa-solid fa-trash-can"></i> Xóa
-                </button>
-              </form>
+              <!-- XOÁ: MỞ POPUP MODAL XÁC NHẬN -->
+              <button type="button" class="btn-action-delete cat-pill"
+                onclick="openDeleteCommentModal(this)"
+                data-id="{{ $comment->id }}"
+                data-author="{{ $comment->author_name }}"
+                data-post="{{ $cPost?->title ?? 'Bài viết' }}"
+                data-content="{{ Str::limit($comment->content, 120) }}"
+                data-time="{{ $comment->created_at->format('d/m/Y H:i') }}"
+                data-delete-url="{{ route('admin.comments.destroy', $comment->id) }}"
+                style="padding: 0.35rem 0.65rem; font-size: 0.78rem; font-weight: 700; color: #dc2626; border-color: #fecaca; background: none; cursor: pointer;"
+                title="Xóa bình luận">
+                <i class="fa-solid fa-trash-can"></i> Xóa
+              </button>
             </td>
           </tr>
           @empty
@@ -263,6 +268,72 @@
       <button type="button" onclick="closeViewCommentModal()" class="btn-publish-trigger" style="background-color: var(--executive-blue); padding: 0.5rem 1.25rem; font-size: 0.84rem; border: none; color: #fff; border-radius: 6px; cursor: pointer;">
         Đóng
       </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================================================================
+     MODAL POPUP: XÁC NHẬN XÓA BÌNH LUẬN (GIAO DIỆN CHUYÊN NGHIỆP)
+     ====================================================================== -->
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel" aria-hidden="true" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); z-index: 10000; align-items: center; justify-content: center; backdrop-filter: blur(4px);">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 480px; width: 92%;">
+    <div class="modal-content" style="border-radius: 14px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); background-color: var(--bg-card, #ffffff); overflow: hidden;">
+      
+      <!-- Modal Header -->
+      <div class="modal-header" style="border-bottom: 1px solid var(--border-card, #f1f5f9); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(239, 68, 68, 0.12); color: #ef4444; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; border: 1px solid rgba(239, 68, 68, 0.2);">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div>
+            <h5 class="modal-title" id="deleteCommentModalLabel" style="font-size: 1.05rem; font-weight: 800; color: var(--text-title, #0f172a); margin: 0;">
+              Xác nhận xóa bình luận
+            </h5>
+            <p style="font-size: 0.75rem; color: var(--text-muted, #64748b); margin: 0;">
+              Thao tác này sẽ gỡ bình luận khỏi bài viết
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" data-bs-dismiss="modal" onclick="closeDeleteCommentModal()" aria-label="Đóng" style="background: none; border: none; color: var(--text-muted); font-size: 1.15rem; cursor: pointer; padding: 0.35rem; border-radius: 6px; display: flex; align-items: center; justify-content: center; line-height: 1;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Form Xác nhận Xóa -->
+      <form id="deleteCommentForm" action="" method="POST">
+        @csrf
+        @method('DELETE')
+        <div class="modal-body" style="padding: 1.5rem;">
+          <p style="font-size: 0.92rem; color: var(--text-body, #1e293b); line-height: 1.6; margin: 0 0 0.85rem 0;">
+            Bạn có chắc chắn muốn xóa phản hồi của độc giả <strong id="deleteCommentAuthorTarget" style="color: #ef4444;"></strong>?
+          </p>
+
+          <div style="background: var(--bg-subtle, #f8fafc); border: 1px solid var(--border-card, #e2e8f0); border-radius: 8px; padding: 0.85rem 1rem; margin-bottom: 1rem;">
+            <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+              <i class="fa-solid fa-newspaper" style="color: var(--executive-blue);"></i>
+              <span id="deleteCommentPostTarget" style="font-weight: 700; color: var(--text-title);"></span>
+            </div>
+            <div id="deleteCommentContentTarget" style="font-size: 0.85rem; color: var(--text-body); font-style: italic; line-height: 1.5; word-break: break-word;"></div>
+          </div>
+
+          <div style="background: rgba(239, 68, 68, 0.05); border: 1px dashed rgba(239, 68, 68, 0.25); border-radius: 8px; padding: 0.75rem 1rem; display: flex; align-items: flex-start; gap: 0.65rem;">
+            <i class="fa-solid fa-circle-exclamation" style="color: #ef4444; font-size: 0.95rem; margin-top: 0.15rem; flex-shrink: 0;"></i>
+            <span style="font-size: 0.78rem; color: var(--text-muted, #64748b); line-height: 1.45;">
+              Bình luận sẽ bị xóa vĩnh viễn khỏi hệ thống và <strong>không thể hoàn tác</strong>.
+            </span>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer" style="border-top: 1px solid var(--border-card, #f1f5f9); padding: 1rem 1.5rem; display: flex; justify-content: flex-end; gap: 0.75rem; background: var(--bg-subtle, #f8fafc);">
+          <button type="button" class="btn" onclick="closeDeleteCommentModal()" data-bs-dismiss="modal" style="font-size: 0.85rem; font-weight: 600; padding: 0.55rem 1.15rem; border-radius: 6px; color: var(--text-muted, #64748b); background: var(--bg-card, #ffffff); border: 1px solid var(--border-card, #cbd5e1); cursor: pointer; transition: all 0.2s;">
+            Hủy bỏ
+          </button>
+          <button type="submit" class="btn" style="background-color: #ef4444; border: none; color: #ffffff; font-size: 0.85rem; font-weight: 700; padding: 0.55rem 1.35rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; box-shadow: 0 4px 14px rgba(239, 68, 68, 0.3); transition: background-color 0.2s;">
+            <i class="fa-solid fa-trash-can"></i> Xác nhận xóa
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

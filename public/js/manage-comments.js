@@ -20,6 +20,42 @@ window.openViewCommentModal = function(author, postTitle, content, time, postUrl
     }
   };
 
+  // Hàm mở popup Xác nhận Xóa bình luận và đổ dữ liệu
+  window.openDeleteCommentModal = function(btn) {
+    if (!btn) return;
+    const deleteUrl = btn.getAttribute('data-delete-url');
+    const author = btn.getAttribute('data-author');
+    const post = btn.getAttribute('data-post');
+    const content = btn.getAttribute('data-content');
+
+    const form = document.getElementById('deleteCommentForm');
+    const authorTarget = document.getElementById('deleteCommentAuthorTarget');
+    const postTarget = document.getElementById('deleteCommentPostTarget');
+    const contentTarget = document.getElementById('deleteCommentContentTarget');
+    const modal = document.getElementById('deleteCommentModal');
+
+    if (form) form.action = deleteUrl;
+    if (authorTarget) authorTarget.textContent = author || 'Độc giả';
+    if (postTarget) postTarget.textContent = post || 'Bài viết';
+    if (contentTarget) contentTarget.textContent = content ? `"${content}"` : '';
+
+    if (modal) {
+      modal.classList.add('show', 'active');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  // Hàm đóng popup Xác nhận Xóa bình luận
+  window.closeDeleteCommentModal = function() {
+    const modal = document.getElementById('deleteCommentModal');
+    if (modal) {
+      modal.classList.remove('show', 'active');
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     // Live filter client-side cho bảng bình luận
     const filterInput = document.getElementById('commentFilterInput');
@@ -142,6 +178,26 @@ window.openViewCommentModal = function(author, postTitle, content, time, postUrl
         currentCategory = btn.getAttribute('data-cat') || 'all';
         applyFilter();
       });
+    });
+
+    // Đóng popup khi click ra ngoài vùng mờ hoặc nút close
+    document.addEventListener('click', function(e) {
+      if (e.target.id === 'deleteCommentModal' || e.target.id === 'viewCommentModal' || e.target.classList.contains('modal')) {
+        closeDeleteCommentModal();
+        closeViewCommentModal();
+      }
+      if (e.target.closest('[data-bs-dismiss="modal"]') || e.target.closest('.btn-close-modal')) {
+        closeDeleteCommentModal();
+        closeViewCommentModal();
+      }
+    });
+
+    // Đóng popup khi bấm phím ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeDeleteCommentModal();
+        closeViewCommentModal();
+      }
     });
 
     // Tự động mở modal chi tiết bình luận nếu có thẻ dữ liệu #autoOpenCommentData

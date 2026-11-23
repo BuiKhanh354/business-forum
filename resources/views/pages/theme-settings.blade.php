@@ -37,7 +37,7 @@
         <div style="display: flex; align-items: center; gap: 0.65rem; font-size: 0.84rem; color: var(--executive-blue); font-weight: 600;">
             <i class="fa-solid fa-circle-check" style="font-size: 1.1rem;"></i>
             <span>
-                Mọi thay đổi về màu sắc, chế độ hiển thị và độ bo góc sẽ <strong>xem trước trực tiếp ngay lập tức</strong> trên trình duyệt và tự động lưu vào cơ sở dữ liệu khi bạn nhấn "Lưu & Áp dụng".
+                Mọi thay đổi về màu sắc và chế độ hiển thị sẽ <strong>xem trước trực tiếp ngay lập tức</strong> trên trình duyệt và tự động lưu vào cơ sở dữ liệu khi bạn nhấn "Lưu & Áp dụng".
             </span>
         </div>
         <span style="font-size: 0.74rem; background: #ffffff; padding: 0.25rem 0.65rem; border-radius: 4px; font-weight: 800; color: var(--executive-blue); border: 1px solid var(--executive-blue-border);">
@@ -256,29 +256,6 @@
                             <input type="text" name="card_bg_color" id="inputCardColor" value="{{ $settings['card_bg_color'] ?? '#ffffff' }}" style="flex: 1; font-family: monospace; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; padding: 0.45rem 0.65rem; border: 1px solid var(--border-card); border-radius: 6px; outline: none; background: var(--bg-card); color: var(--text-title);">
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- 4. ĐỘ BO GÓC GIAO DIỆN (BORDER RADIUS) -->
-            <div class="widget-card" style="padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid var(--border-card);">
-                <div class="theme-section-title" style="display: flex; align-items: center; gap: 0.5rem; font-size: 1.1rem; font-weight: 800; color: var(--obsidian); margin-bottom: 0.35rem;">
-                    <i class="fa-solid fa-shapes" style="color: var(--executive-blue);"></i>
-                    <span>Độ bo góc giao diện toàn hệ thống (Border Radius)</span>
-                </div>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
-                    Điều chỉnh độ cong bo góc của các nút bấm, thẻ bài viết, ô nhập liệu và các khung hiển thị:
-                </p>
-
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button type="button" class="radius-option-btn {{ ($settings['border_radius'] ?? 'default') === 'sharp' ? 'active' : '' }}" onclick="selectBorderRadius('sharp', this)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem; font-weight: 700; border-radius: 3px; cursor: pointer;">
-                        <i class="fa-regular fa-square"></i> Góc vuông sắc sảo
-                    </button>
-                    <button type="button" class="radius-option-btn {{ ($settings['border_radius'] ?? 'default') === 'default' ? 'active' : '' }}" onclick="selectBorderRadius('default', this)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem; font-weight: 700; border-radius: 8px; cursor: pointer;">
-                        <i class="fa-solid fa-square"></i> Chuẩn Doanh nghiệp 
-                    </button>
-                    <button type="button" class="radius-option-btn {{ ($settings['border_radius'] ?? 'default') === 'round' ? 'active' : '' }}" onclick="selectBorderRadius('round', this)" style="padding: 0.75rem 1.25rem; font-size: 0.85rem; font-weight: 700; border-radius: 16px; cursor: pointer;">
-                        <i class="fa-solid fa-circle"></i> Mềm mại bo tròn 
-                    </button>
                 </div>
             </div>
 
