@@ -122,7 +122,7 @@
                                             $admFav = "https://www.google.com/s2/favicons?domain=" . ($admHost ?: 'example.com') . "&sz=32";
                                             $admTitle = !empty($post->external_link_title) ? $post->external_link_title : ($admHost ?: 'Liên kết');
                                         @endphp
-                                            <a href="{{ $admUrl }}" target="_blank" rel="noopener noreferrer" style="background: #eff6ff; color: #2563eb; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.7rem; text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid #bfdbfe;" title="{{ $admLink }}">
+                                            <a href="{{ $admUrl }}" target="_blank" rel="noopener noreferrer" class="post-external-link-badge" title="{{ $admLink }}">
                                                 <img src="{{ $admFav }}" alt="Favicon" style="width: 13px; height: 13px; object-fit: contain; border-radius: 2px;" onerror="this.style.display='none'">
                                                 <span>{{ Str::limit($admTitle, 22) }}</span>
                                             </a>
@@ -287,7 +287,7 @@
      ====================================================================== -->
 <div class="modal fade" id="createPostModal" tabindex="-1" aria-labelledby="createPostModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content" style="border-radius: 12px; border: 1px solid var(--border-light, #e2e8f0); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); background-color: #ffffff;">
+    <div class="modal-content" style="border-radius: 12px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); background-color: var(--bg-card, #ffffff); color: var(--text-title);">
       
       <div class="modal-header" style="border-bottom: 1px solid #f1f5f9; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
         <div style="display: flex; align-items: center; gap: 0.65rem;">
@@ -451,7 +451,7 @@
      ====================================================================== -->
 <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
-    <div class="modal-content" style="border-radius: 12px; border: 1px solid var(--border-light, #e2e8f0); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); background-color: #ffffff;">
+    <div class="modal-content" style="border-radius: 12px; border: 1px solid var(--border-card, #e2e8f0); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); background-color: var(--bg-card, #ffffff); color: var(--text-title);">
       
       <div class="modal-header" style="border-bottom: 1px solid #f1f5f9; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between;">
         <div style="display: flex; align-items: center; gap: 0.65rem;">

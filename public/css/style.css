@@ -112,3 +112,127 @@ body.theme-dark .author-liked-badge {
 body.theme-dark .author-liked-avatar-wrap .badge-heart-icon {
   background: #0f172a;
 }
+
+
+/* ==========================================================================
+   QUẢN LÝ BÀI VIẾT: EXTERNAL LINK BADGE (LIGHT & DARK MODE)
+   ========================================================================== */
+.post-external-link-badge {
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid #bfdbfe;
+  transition: all 0.2s ease;
+}
+.post-external-link-badge:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+[data-theme="dark"] .post-external-link-badge,
+body.theme-dark .post-external-link-badge {
+  background: rgba(37, 99, 235, 0.22) !important;
+  color: #93c5fd !important;
+  border-color: rgba(147, 197, 253, 0.35) !important;
+}
+[data-theme="dark"] .post-external-link-badge span,
+body.theme-dark .post-external-link-badge span {
+  color: #93c5fd !important;
+}
+
+/* ==========================================================================
+   QUẢN LÝ ĐỀ XUẤT HỢP TÁC: GHI CHÚ NỘI BỘ & BADGES (LIGHT & DARK MODE)
+   ========================================================================== */
+.proposal-admin-notes-badge {
+  background: #fefce8;
+  border-left: 3px solid #ca8a04;
+  color: #854d0e;
+}
+[data-theme="dark"] .proposal-admin-notes-badge,
+body.theme-dark .proposal-admin-notes-badge {
+  background: rgba(217, 119, 6, 0.16) !important;
+  border-left-color: #f59e0b !important;
+  color: #fef08a !important;
+}
+[data-theme="dark"] .proposal-admin-notes-badge strong,
+body.theme-dark .proposal-admin-notes-badge strong,
+[data-theme="dark"] .proposal-admin-notes-badge span,
+body.theme-dark .proposal-admin-notes-badge span {
+  color: #fef08a !important;
+}
+
+.modal-admin-notes-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+}
+[data-theme="dark"] .modal-admin-notes-box,
+body.theme-dark .modal-admin-notes-box {
+  background: rgba(217, 119, 6, 0.15) !important;
+  border-color: rgba(217, 119, 6, 0.35) !important;
+}
+.modal-admin-notes-box label {
+  color: #92400e;
+}
+[data-theme="dark"] .modal-admin-notes-box label,
+body.theme-dark .modal-admin-notes-box label {
+  color: #fde68a !important;
+}
+.modal-admin-notes-box span {
+  color: #b45309;
+}
+[data-theme="dark"] .modal-admin-notes-box span,
+body.theme-dark .modal-admin-notes-box span {
+  color: #fcd34d !important;
+}
+
+.proposal-company-badge {
+  background: #eff6ff;
+  color: var(--executive-blue);
+}
+[data-theme="dark"] .proposal-company-badge,
+body.theme-dark .proposal-company-badge {
+  background: rgba(37, 99, 235, 0.22) !important;
+  color: #93c5fd !important;
+}
+
+/* MODAL & FORM CONTROLS DARK MODE TOÀN DIỆN */
+[data-theme="dark"] .modal-content,
+body.theme-dark .modal-content {
+  background-color: var(--bg-card) !important;
+  color: var(--text-title) !important;
+  border-color: var(--border-card) !important;
+}
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer,
+body.theme-dark .modal-header,
+body.theme-dark .modal-footer {
+  background-color: var(--bg-subtle) !important;
+  border-color: var(--border-light) !important;
+}
+[data-theme="dark"] .modal-body,
+body.theme-dark .modal-body {
+  background-color: var(--bg-card) !important;
+  color: var(--text-title) !important;
+}
+[data-theme="dark"] .modal-content input,
+[data-theme="dark"] .modal-content textarea,
+[data-theme="dark"] .modal-content select,
+body.theme-dark .modal-content input,
+body.theme-dark .modal-content textarea,
+body.theme-dark .modal-content select {
+  background-color: var(--bg-subtle) !important;
+  color: var(--text-title) !important;
+  border-color: var(--border-card) !important;
+}
+[data-theme="dark"] .modal-content input::placeholder,
+[data-theme="dark"] .modal-content textarea::placeholder,
+body.theme-dark .modal-content input::placeholder,
+body.theme-dark .modal-content textarea::placeholder {
+  color: var(--text-muted) !important;
+}

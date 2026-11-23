@@ -213,8 +213,8 @@
                   {{ $item->message }}
                 </div>
                 @if($item->admin_notes)
-                  <div style="margin-top: 0.35rem; font-size: 0.74rem; background: #fefce8; border-left: 2px solid #ca8a04; padding: 2px 6px; color: #854d0e; border-radius: 2px;">
-                    <strong>Ghi chú:</strong> {{ Str::limit($item->admin_notes, 80) }}
+                  <div class="proposal-admin-notes-badge" style="margin-top: 0.35rem; font-size: 0.74rem; border-left: 2px solid #ca8a04; padding: 2px 6px; border-radius: 2px;">
+                    <strong>Ghi chú:</strong> <span>{{ Str::limit($item->admin_notes, 80) }}</span>
                   </div>
                 @endif
               </td>
@@ -325,10 +325,10 @@
      MODAL POPUP: CHI TIẾT ĐỀ XUẤT / THƯ NGỎ HỢP TÁC
      ====================================================================== -->
 <div id="proposalDetailModal" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.65); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(4px); padding: 1.25rem;">
-  <div style="background: #ffffff; border-radius: 12px; max-width: 720px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid #e2e8f0; animation: modalFadeIn 0.2s ease;">
+  <div style="background: var(--bg-card, #ffffff); color: var(--text-title); border-radius: 12px; max-width: 720px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid var(--border-card, #e2e8f0); animation: modalFadeIn 0.2s ease;">
     
     <!-- Modal Header -->
-    <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between; background: #f8fafc;">
+    <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border-light, #f1f5f9); display: flex; align-items: center; justify-content: space-between; background: var(--bg-subtle, #f8fafc);">
       <div>
         <div style="font-size: 0.75rem; font-weight: 800; color: var(--executive-blue); text-transform: uppercase; letter-spacing: 0.5px;">
           HỒ SƠ THƯ NGỎ ĐỐI TÁC
@@ -380,7 +380,7 @@
         <div style="font-size: 0.78rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.45rem; text-transform: uppercase; letter-spacing: 0.5px;">
           <i class="fa-solid fa-align-left" style="color: var(--executive-blue);"></i> Nội dung trao đổi chi tiết:
         </div>
-        <div id="modalMessageContent" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 1.15rem; font-size: 0.88rem; line-height: 1.6; color: var(--text-title); white-space: pre-wrap; max-height: 250px; overflow-y: auto;">
+        <div id="modalMessageContent" style="background: var(--bg-subtle, #ffffff); border: 1px solid var(--border-card, #cbd5e1); border-radius: 8px; padding: 1.15rem; font-size: 0.88rem; line-height: 1.6; color: var(--text-title); white-space: pre-wrap; max-height: 250px; overflow-y: auto;">
         </div>
       </div>
 
@@ -406,19 +406,19 @@
       </div>
 
       <!-- Hàng 4: Ghi chú nội bộ của Admin & Đổi trạng thái -->
-      <div style="background: #fffbeb; border: 1px solid #fef3c7; border-radius: 8px; padding: 1rem 1.25rem;">
+      <div class="modal-admin-notes-box" style="border-radius: 8px; padding: 1rem 1.25rem;">
         <form id="modalAdminNotesForm" method="POST" action="">
           @csrf
           @method('PATCH')
 
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-            <label for="modalAdminNotesInput" style="font-size: 0.8rem; font-weight: 800; color: #92400e; text-transform: uppercase; letter-spacing: 0.5px;">
+            <label for="modalAdminNotesInput" style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
               <i class="fa-solid fa-note-sticky"></i> Ghi chú nội bộ Admin (Lịch hẹn / Đánh giá):
             </label>
-            <span style="font-size: 0.72rem; color: #b45309;">Chỉ Admin nhìn thấy</span>
+            <span style="font-size: 0.72rem;">Chỉ Admin nhìn thấy</span>
           </div>
 
-          <textarea name="admin_notes" id="modalAdminNotesInput" rows="3" placeholder="Nhập ghi chú cuộc gọi, kết quả gặp gỡ hoặc phân công xử lý..." style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #fde68a; border-radius: 6px; font-size: 0.85rem; outline: none; background: #ffffff; resize: vertical; margin-bottom: 0.75rem;"></textarea>
+          <textarea name="admin_notes" id="modalAdminNotesInput" rows="3" placeholder="Nhập ghi chú cuộc gọi, kết quả gặp gỡ hoặc phân công xử lý..." style="width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--border-card, #fde68a); border-radius: 6px; font-size: 0.85rem; outline: none; background: var(--bg-card, #ffffff); color: var(--text-title); resize: vertical; margin-bottom: 0.75rem;"></textarea>
 
           <div style="display: flex; justify-content: flex-end;">
             <button type="submit" class="cat-pill" style="font-size: 0.8rem; padding: 0.45rem 1rem; background: #d97706; color: #fff; border: none; border-radius: 5px; cursor: pointer;">
