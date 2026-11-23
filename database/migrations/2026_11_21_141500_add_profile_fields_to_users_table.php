@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             if (!Schema::hasColumn('users', 'avatar')) {
-                $table->string('avatar')->nullable()->default('assets/images/admin-khanh.jpg')->after('email');
+                $table->string('avatar')->nullable()->default('assets/images/admin-khanh.jpg');
             }
             if (!Schema::hasColumn('users', 'phone')) {
-                $table->string('phone')->nullable()->default('0900 123 456')->after('avatar');
+                $table->string('phone')->nullable()->default('0900 123 456');
             }
             if (!Schema::hasColumn('users', 'role_title')) {
-                $table->string('role_title')->nullable()->default('Founder & Ban Quản trị')->after('phone');
+                $table->string('role_title')->nullable()->default('Founder & Ban Quản trị');
             }
             if (!Schema::hasColumn('users', 'bio')) {
-                $table->text('bio')->nullable()->after('role_title');
+                $table->text('bio')->nullable();
             }
         });
     }
