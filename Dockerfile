@@ -19,6 +19,7 @@ WORKDIR /app
 COPY . /app
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction
+
 RUN chmod -R 777 /app/storage /app/bootstrap/cache
 
 EXPOSE 8000
