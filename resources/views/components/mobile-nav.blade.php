@@ -6,7 +6,7 @@
         <i class="fa-solid fa-house"></i>
         <span>Trang chủ</span>
     </a>
-    <button type="button" class="mobile-nav-item" id="mobileSearchBtn" title="Tìm kiếm">
+    <button type="button" class="mobile-nav-item" id="mobileSearchBtn" onclick="toggleMobileSearch()" title="Tìm kiếm">
         <i class="fa-solid fa-magnifying-glass"></i>
         <span>Tìm kiếm</span>
     </button>

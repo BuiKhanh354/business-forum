@@ -579,18 +579,46 @@
     font-size: 0.95rem;
     margin-left: auto;
   }
+  .topbar-user-area {
+    gap: 0.4rem !important;
+    flex-shrink: 0;
+  }
+  .topbar-user-info {
+    display: none !important;
+  }
+  .topbar-admin-profile-link {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+  }
+  .topbar-avatar {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    flex-shrink: 0 !important;
+    display: block !important;
+    overflow: hidden !important;
+    border-radius: 6px !important;
+  }
+  .topbar-avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
   .btn-mobile-search-toggle {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 8px;
     background: var(--bg-subtle, #f1f5f9);
     border: 1px solid var(--border-card);
     color: var(--text-title);
     cursor: pointer;
     font-size: 0.95rem;
+    flex-shrink: 0 !important;
   }
   .mobile-search-bar {
     position: absolute;

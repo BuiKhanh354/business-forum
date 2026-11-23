@@ -20,17 +20,17 @@
 
     <!-- THANH TÌM KIẾM CHUẨN MEDIAN UI (CTRL + K & LIVE FILTER) -->
     <div class="topbar-search-box">
-        <span class="topbar-search-icon">
+        <button type="button" class="topbar-search-icon" id="btnTopSearchSubmit" onclick="performGlobalSearch()" title="Tìm kiếm" style="background: none; border: none; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; justify-content: center; padding: 0 0.5rem;">
             <i class="fa-solid fa-magnifying-glass"></i>
-        </span>
-        <input type="text" id="topSearchInput" placeholder="Tìm kiếm bài viết, chủ đề, chiến lược...">
+        </button>
+        <input type="text" id="topSearchInput" placeholder="Tìm kiếm bài viết, chủ đề, chiến lược..." value="{{ request('q') }}" autocomplete="off" onkeydown="if(event.key==='Enter') performGlobalSearch()">
         <span class="topbar-kbd-shortcut">Ctrl K</span>
     </div>
 
     <!-- KHU VỰC THAO TÁC: DARK MODE, THÔNG BÁO & USER -->
     <div class="topbar-user-area">
         <!-- NÚT MỞ TÌM KIẾM TRÊN MOBILE -->
-        <button type="button" class="btn-mobile-search-toggle" id="btnMobileSearchToggle" title="Tìm kiếm bài viết">
+        <button type="button" class="btn-mobile-search-toggle" id="btnMobileSearchToggle" onclick="toggleMobileSearch()" title="Tìm kiếm bài viết">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
 
@@ -151,20 +151,20 @@
         </div>
 
         <!-- THÔNG TIN TÀI KHOẢN ADMIN ĐÃ ĐĂNG NHẬP -->
-        <a href="{{ route('admin.profile') }}" style="display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: inherit;" title="Hồ sơ quản trị viên">
-            <div class="topbar-avatar" style="border-radius: 5px; overflow: hidden; width: 34px; height: 34px;">
-                <img id="topbarAvatarImg" src="{{ asset($currentUser?->avatar ?? 'assets/images/admin-khanh.jpg') }}" alt="Avatar Admin" style="width: 100%; height: 100%; object-fit: cover;">
+        <a href="{{ route('admin.profile') }}" class="topbar-admin-profile-link" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: inherit; flex-shrink: 0;" title="Hồ sơ quản trị viên">
+            <div class="topbar-avatar" style="border-radius: 6px; overflow: hidden; width: 34px; height: 34px; flex-shrink: 0; border: 1.5px solid var(--border-card);">
+                <img id="topbarAvatarImg" src="{{ asset($currentUser?->avatar ?? 'assets/images/admin-khanh.jpg') }}" alt="Avatar Admin" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
             </div>
             <div class="topbar-user-info" style="display: flex; flex-direction: column; line-height: 1.2;">
-                <span class="topbar-user-name" style="font-size: 0.84rem; font-weight: 800; color: var(--text-title);">{{ $currentUser?->name ?? 'Admin' }}</span>
-                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">{{ $currentUser?->role_title ?? 'Quản trị viên' }}</span>
+                <span class="topbar-user-name" style="font-size: 0.84rem; font-weight: 800; color: var(--text-title); white-space: nowrap;">{{ $currentUser?->name ?? 'Admin' }}</span>
+                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; white-space: nowrap;">{{ $currentUser?->role_title ?? 'Quản trị viên' }}</span>
             </div>
         </a>
 
         <form id="topbarLogoutForm" action="{{ route('logout') }}" method="POST" style="display: none;">
             @csrf
         </form>
-        <button type="button" class="median-icon-btn" onclick="if(confirm('Bạn có chắc chắn muốn đăng xuất khỏi quản trị?')) document.getElementById('topbarLogoutForm').submit();" title="Đăng xuất khỏi hệ thống" style="color: #ef4444; margin-left: 0.2rem;">
+        <button type="button" class="median-icon-btn btn-topbar-logout" onclick="if(confirm('Bạn có chắc chắn muốn đăng xuất khỏi quản trị?')) document.getElementById('topbarLogoutForm').submit();" title="Đăng xuất khỏi hệ thống" style="color: #ef4444; flex-shrink: 0;">
             <i class="fa-solid fa-arrow-right-from-bracket"></i>
         </button>
         @endauth
@@ -172,10 +172,10 @@
 
     <!-- THANH TÌM KIẾM MỞ RỘNG TRÊN MOBILE (SLIDE DOWN) -->
     <div class="mobile-search-bar" id="mobileSearchBar" style="display: none;">
-        <form action="{{ route('home') }}" method="GET" class="mobile-search-form" id="mobileSearchForm">
-            <span class="mobile-search-icon">
+        <form action="{{ route('home') }}" method="GET" class="mobile-search-form" id="mobileSearchForm" onsubmit="event.preventDefault(); performGlobalSearch();">
+            <button type="submit" class="mobile-search-icon" style="background:none;border:none;cursor:pointer;color:var(--text-muted);display:flex;align-items:center;padding:0;">
                 <i class="fa-solid fa-magnifying-glass"></i>
-            </span>
+            </button>
             <input 
                 type="text" 
                 name="q" 
@@ -185,10 +185,10 @@
                 value="{{ request('q') }}"
                 autocomplete="off"
             >
-            <button type="button" class="btn-clear-mobile-search" id="btnClearMobileSearch" style="display: none;" title="Xóa nội dung">
+            <button type="button" class="btn-clear-mobile-search" id="btnClearMobileSearch" onclick="clearGlobalSearch()" style="display: none;" title="Xóa nội dung">
                 <i class="fa-solid fa-xmark"></i>
             </button>
-            <button type="button" class="btn-close-mobile-search" id="btnCloseMobileSearch" title="Đóng tìm kiếm">
+            <button type="button" class="btn-close-mobile-search" id="btnCloseMobileSearch" onclick="toggleMobileSearch()" title="Đóng tìm kiếm">
                 <i class="fa-solid fa-xmark"></i>
             </button>
         </form>

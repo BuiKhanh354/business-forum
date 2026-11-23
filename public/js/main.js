@@ -769,87 +769,153 @@ window.showToastNotification = function (message, type) {
   }, 2500);
 };
 
-// Quản lý tìm kiếm trên điện thoại (Mobile Search Bar & Live Sync)
-document.addEventListener('DOMContentLoaded', function () {
-  const mobileSearchToggleBtn = document.getElementById("btnMobileSearchToggle");
-  const mobileBottomSearchBtn = document.getElementById("mobileSearchBtn");
-  const mobileSearchBar = document.getElementById("mobileSearchBar");
-  const mobileSearchInput = document.getElementById("mobileSearchInput");
-  const clearMobileSearchBtn = document.getElementById("btnClearMobileSearch");
-  const closeMobileSearchBtn = document.getElementById("btnCloseMobileSearch");
-  const topSearchInput = document.getElementById("topSearchInput");
+// ==========================================================================
+// TÌM KIẾM TOÀN HỆ THỐNG & MOBILE SEARCH BAR
+// ==========================================================================
+window.performGlobalSearch = function (customQuery) {
+  const topInput = document.getElementById('topSearchInput');
+  const mobInput = document.getElementById('mobileSearchInput');
+  let query = '';
+  if (customQuery !== undefined) {
+    query = String(customQuery).trim().toLowerCase();
+  } else if (mobInput && mobInput.value.trim()) {
+    query = mobInput.value.trim().toLowerCase();
+  } else if (topInput && topInput.value.trim()) {
+    query = topInput.value.trim().toLowerCase();
+  }
 
-  function openMobileSearchBox() {
-    if (!mobileSearchBar) return;
-    mobileSearchBar.classList.add("active");
-    mobileSearchBar.style.display = "block";
-    if (mobileSearchInput) {
-      if (topSearchInput && topSearchInput.value) {
-        mobileSearchInput.value = topSearchInput.value;
+  // 1. Nếu đang ở trang chủ (home)
+  const postsList = document.getElementById('postsList');
+  if (postsList) {
+    const postCards = postsList.querySelectorAll('.post-card');
+    let matchedCount = 0;
+    postCards.forEach(card => {
+      const title = card.querySelector('.post-main-title')?.textContent.toLowerCase() || '';
+      const excerpt = card.querySelector('.post-excerpt-text')?.textContent.toLowerCase() || '';
+      const category = card.querySelector('.post-category-badge')?.textContent.toLowerCase() || '';
+      const matches = !query || title.includes(query) || excerpt.includes(query) || category.includes(query);
+      card.style.display = matches ? '' : 'none';
+      if (matches) matchedCount++;
+    });
+
+    let noResultMsg = document.getElementById('noSearchResultMsg');
+    if (query && matchedCount === 0) {
+      if (!noResultMsg) {
+        noResultMsg = document.createElement('div');
+        noResultMsg.id = 'noSearchResultMsg';
+        noResultMsg.style.cssText = 'padding: 2.5rem 1.5rem; text-align: center; background: var(--bg-card); border-radius: 8px; border: 1px dashed var(--border-card); margin-top: 1rem;';
+        noResultMsg.innerHTML = `
+          <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; color: var(--text-light-muted); margin-bottom: 0.75rem;"></i>
+          <div style="font-size: 1rem; font-weight: 700; color: var(--text-title); margin-bottom: 0.25rem;">Không tìm thấy kết quả phù hợp</div>
+          <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 1rem;">Không có bài viết nào khớp với từ khóa "${query}".</p>
+          <button type="button" class="cat-pill" onclick="window.clearGlobalSearch()" style="font-size: 0.8rem; padding: 0.45rem 1rem;">Xóa bộ lọc tìm kiếm</button>
+        `;
+        postsList.appendChild(noResultMsg);
+      } else {
+        noResultMsg.style.display = 'block';
       }
-      setTimeout(() => mobileSearchInput.focus(), 120);
-      if (clearMobileSearchBtn) {
-        clearMobileSearchBtn.style.display = mobileSearchInput.value ? "inline-flex" : "none";
+    } else if (noResultMsg) {
+      noResultMsg.style.display = 'none';
+    }
+
+    if (query && window.innerWidth <= 768) {
+      postsList.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    return;
+  }
+
+  // 2. Nếu đang ở trang Quản lý bài viết Admin
+  const adminRows = document.querySelectorAll('.admin-post-row');
+  if (adminRows.length > 0) {
+    adminRows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = (!query || text.includes(query)) ? '' : 'none';
+    });
+    return;
+  }
+
+  // 3. Nếu đang ở trang khác và người dùng nhấn submit
+  if (query) {
+    window.location.href = '/?q=' + encodeURIComponent(query);
+  }
+};
+
+window.clearGlobalSearch = function () {
+  const topInput = document.getElementById('topSearchInput');
+  const mobInput = document.getElementById('mobileSearchInput');
+  const clearBtn = document.getElementById('btnClearMobileSearch');
+  if (topInput) topInput.value = '';
+  if (mobInput) mobInput.value = '';
+  if (clearBtn) clearBtn.style.display = 'none';
+  window.performGlobalSearch('');
+};
+
+window.toggleMobileSearch = function () {
+  const bar = document.getElementById('mobileSearchBar');
+  if (!bar) return;
+  const isCurrentlyOpen = bar.classList.contains('active') || bar.style.display === 'block';
+  if (isCurrentlyOpen) {
+    bar.classList.remove('active');
+    bar.style.display = 'none';
+  } else {
+    bar.classList.add('active');
+    bar.style.display = 'block';
+    const topInput = document.getElementById('topSearchInput');
+    const mobInput = document.getElementById('mobileSearchInput');
+    const clearBtn = document.getElementById('btnClearMobileSearch');
+    if (mobInput) {
+      if (topInput && topInput.value) {
+        mobInput.value = topInput.value;
       }
+      if (clearBtn) {
+        clearBtn.style.display = mobInput.value ? 'inline-flex' : 'none';
+      }
+      setTimeout(() => mobInput.focus(), 80);
     }
   }
+};
 
-  function closeMobileSearchBox() {
-    if (!mobileSearchBar) return;
-    mobileSearchBar.classList.remove("active");
-    mobileSearchBar.style.display = "none";
-  }
+function initSearchListeners() {
+  const topInput = document.getElementById('topSearchInput');
+  const mobInput = document.getElementById('mobileSearchInput');
+  const clearBtn = document.getElementById('btnClearMobileSearch');
 
-  if (mobileSearchToggleBtn) {
-    mobileSearchToggleBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      if (mobileSearchBar && mobileSearchBar.classList.contains("active")) {
-        closeMobileSearchBox();
-      } else {
-        openMobileSearchBox();
-      }
-    });
-  }
-
-  if (mobileBottomSearchBtn) {
-    mobileBottomSearchBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      openMobileSearchBox();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-  }
-
-  if (closeMobileSearchBtn) {
-    closeMobileSearchBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      closeMobileSearchBox();
-    });
-  }
-
-  if (clearMobileSearchBtn && mobileSearchInput) {
-    clearMobileSearchBtn.addEventListener("click", function () {
-      mobileSearchInput.value = "";
-      clearMobileSearchBtn.style.display = "none";
-      if (topSearchInput) {
-        topSearchInput.value = "";
-        topSearchInput.dispatchEvent(new Event("input"));
-      }
-      mobileSearchInput.dispatchEvent(new Event("input"));
-      mobileSearchInput.focus();
-    });
-  }
-
-  if (mobileSearchInput) {
-    mobileSearchInput.addEventListener("input", function (e) {
+  if (topInput) {
+    topInput.addEventListener('input', function (e) {
       const val = e.target.value;
-      if (clearMobileSearchBtn) {
-        clearMobileSearchBtn.style.display = val.length > 0 ? "inline-flex" : "none";
+      if (mobInput && mobInput.value !== val) {
+        mobInput.value = val;
       }
-      if (topSearchInput) {
-        topSearchInput.value = val;
-        topSearchInput.dispatchEvent(new Event("input"));
+      window.performGlobalSearch(val);
+    });
+    topInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        window.performGlobalSearch(topInput.value);
       }
     });
   }
-});
+
+  if (mobInput) {
+    mobInput.addEventListener('input', function (e) {
+      const val = e.target.value;
+      if (clearBtn) clearBtn.style.display = val ? 'inline-flex' : 'none';
+      if (topInput && topInput.value !== val) {
+        topInput.value = val;
+      }
+      window.performGlobalSearch(val);
+    });
+    mobInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        window.performGlobalSearch(mobInput.value);
+      }
+    });
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initSearchListeners);
+} else {
+  initSearchListeners();
+}
