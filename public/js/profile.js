@@ -208,6 +208,36 @@ document.addEventListener('DOMContentLoaded', function () {
                 return data;
             })
             .then(data => {
+                // CẬP NHẬT TÊN VÀ THÔNG TIN TRỰC TIẾP LÊN HEADER VÀ GIAO DIỆN KHÔNG CẦN TẢI LẠI TRANG
+                const updatedName = (data.user && data.user.name) || formData.get('name');
+                const updatedRole = (data.user && data.user.role_title) || formData.get('role_title');
+                const updatedBio = (data.user && data.user.bio) || formData.get('bio');
+                const updatedAvatar = (data.user && data.user.avatar);
+
+                if (updatedName) {
+                    document.querySelectorAll('.topbar-user-name, #topbarUserName, #leftDisplayName').forEach(el => {
+                        el.textContent = updatedName;
+                    });
+                }
+
+                if (updatedRole) {
+                    document.querySelectorAll('.topbar-user-role, #topbarUserRole, #leftDisplayRole').forEach(el => {
+                        el.textContent = updatedRole;
+                    });
+                }
+
+                if (updatedBio) {
+                    const leftBio = document.getElementById('leftDisplayBio');
+                    if (leftBio) leftBio.textContent = updatedBio;
+                }
+
+                if (updatedAvatar) {
+                    const fullAvatarUrl = window.resolveAssetUrl ? window.resolveAssetUrl(updatedAvatar) : updatedAvatar;
+                    document.querySelectorAll('#topbarAvatarImg, #profileRowAvatar, #profileLeftAvatar').forEach(img => {
+                        img.src = fullAvatarUrl;
+                    });
+                }
+
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.style.backgroundColor = '#16a34a';

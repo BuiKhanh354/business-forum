@@ -721,7 +721,15 @@ class AdminController extends Controller
         if ($request->ajax() || $request->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'message' => 'Đã cập nhật thông tin cá nhân và kênh truyền thông thành công!'
+                'message' => 'Đã cập nhật thông tin cá nhân và kênh truyền thông thành công!',
+                'user'    => [
+                    'name'       => $user->name,
+                    'email'      => $user->email,
+                    'phone'      => $user->phone,
+                    'role_title' => $user->role_title,
+                    'avatar'     => $user->avatar_url ?? asset($user->avatar ?: 'assets/images/admin-khanh.jpg'),
+                    'bio'        => $user->bio,
+                ]
             ]);
         }
 

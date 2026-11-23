@@ -209,7 +209,7 @@
                             <label style="display: block; font-size: 0.84rem; font-weight: 700; color: var(--text-title); margin-bottom: 0.45rem;">
                                 Họ và tên <span style="color: #ef4444;">*</span>
                             </label>
-                            <input type="text" name="name" value="{{ old('name', $user->name ?? 'Admin Khánh') }}" required oninput="document.getElementById('leftDisplayName').textContent = this.value" placeholder="Họ và tên..." style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.88rem; outline: none; background: #ffffff;">
+                            <input type="text" name="name" value="{{ old('name', $user->name ?? 'Admin Khánh') }}" required oninput="document.querySelectorAll('.topbar-user-name, #topbarUserName, #leftDisplayName').forEach(el => el.textContent = this.value || 'Admin')" placeholder="Họ và tên..." style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.88rem; outline: none; background: #ffffff;">
                         </div>
 
                         <!-- Email -->
@@ -235,7 +235,7 @@
                             <label style="display: block; font-size: 0.84rem; font-weight: 700; color: var(--text-title); margin-bottom: 0.45rem;">
                                 Chức danh / Vai trò:
                             </label>
-                            <input type="text" name="role_title" value="{{ old('role_title', $user->role_title ?? 'Founder & Ban Quản trị') }}" oninput="document.getElementById('leftDisplayRole').textContent = this.value" placeholder="Ví dụ: Founder & Ban Quản trị" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.88rem; outline: none; background: #ffffff;">
+                            <input type="text" name="role_title" value="{{ old('role_title', $user->role_title ?? 'Founder & Ban Quản trị') }}" oninput="document.querySelectorAll('.topbar-user-role, #topbarUserRole, #leftDisplayRole').forEach(el => el.textContent = this.value || 'Quản trị viên')" placeholder="Ví dụ: Founder & Ban Quản trị" style="width: 100%; padding: 0.65rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1; font-size: 0.88rem; outline: none; background: #ffffff;">
                         </div>
                     </div>
 

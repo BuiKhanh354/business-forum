@@ -151,8 +151,8 @@
                 <img id="topbarAvatarImg" src="{{ asset($currentUser?->avatar ?? 'assets/images/admin-khanh.jpg') }}" alt="Avatar Admin" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
             </div>
             <div class="topbar-user-info" style="display: flex; flex-direction: column; line-height: 1.2;">
-                <span class="topbar-user-name" style="font-size: 0.84rem; font-weight: 800; color: var(--text-title); white-space: nowrap;">{{ $currentUser?->name ?? 'Admin' }}</span>
-                <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; white-space: nowrap;">{{ $currentUser?->role_title ?? 'Quản trị viên' }}</span>
+                <span class="topbar-user-name" id="topbarUserName" style="font-size: 0.84rem; font-weight: 800; color: var(--text-title); white-space: nowrap;">{{ $currentUser?->name ?? 'Admin' }}</span>
+                <span class="topbar-user-role" id="topbarUserRole" style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600; white-space: nowrap;">{{ $currentUser?->role_title ?? 'Quản trị viên' }}</span>
             </div>
         </a>
 
