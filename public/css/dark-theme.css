@@ -1,0 +1,695 @@
+/* ==========================================================================
+   CHUYÊN BIỆT GIAO DIỆN TỐI (OBSIDIAN DARK THEME - ULTRA HIGH CONTRAST)
+   Tối ưu chữ viết sắc nét, độ tương phản cao, nút bấm nổi bật, không chói mắt
+   Áp dụng khi [data-theme="dark"] hoặc body.theme-dark
+   ========================================================================== */
+
+/* 1. KHUNG TRANG TOÀN CỤC & THANH CUỘN */
+[data-theme="dark"],
+body.theme-dark {
+  background-color: #080c16 !important;
+  color: #cbd5e1 !important;
+  color-scheme: dark;
+}
+
+[data-theme="dark"] ::selection,
+body.theme-dark ::selection {
+  background-color: rgba(37, 99, 235, 0.45);
+  color: #ffffff;
+}
+
+/* 2. CHỮ VIẾT, TIÊU ĐỀ & VĂN BẢN (TYPOGRAPHY) */
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+[data-theme="dark"] h4, [data-theme="dark"] h5, [data-theme="dark"] h6,
+[data-theme="dark"] .forum-main-title,
+[data-theme="dark"] .post-main-title,
+[data-theme="dark"] .author-name-text,
+[data-theme="dark"] .widget-card-title,
+[data-theme="dark"] .preview-title-row,
+[data-theme="dark"] .modal-title,
+[data-theme="dark"] .brand-name,
+[data-theme="dark"] .theme-section-title,
+body.theme-dark h1, body.theme-dark h2, body.theme-dark h3,
+body.theme-dark h4, body.theme-dark h5, body.theme-dark h6,
+body.theme-dark .forum-main-title,
+body.theme-dark .post-main-title,
+body.theme-dark .author-name-text,
+body.theme-dark .widget-card-title,
+body.theme-dark .preview-title-row,
+body.theme-dark .modal-title,
+body.theme-dark .brand-name,
+body.theme-dark .theme-section-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] .post-excerpt-text,
+[data-theme="dark"] .rules-text,
+body.theme-dark p,
+body.theme-dark .post-excerpt-text,
+body.theme-dark .rules-text {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .text-muted,
+[data-theme="dark"] .forum-subtitle,
+[data-theme="dark"] .post-time-text,
+[data-theme="dark"] .preview-desc-row,
+[data-theme="dark"] .preview-url-subtext,
+[data-theme="dark"] .post-metric-item,
+body.theme-dark .text-muted,
+body.theme-dark .forum-subtitle,
+body.theme-dark .post-time-text,
+body.theme-dark .preview-desc-row,
+body.theme-dark .preview-url-subtext,
+body.theme-dark .post-metric-item {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] strong, [data-theme="dark"] b,
+body.theme-dark strong, body.theme-dark b {
+  color: #f8fafc !important;
+}
+
+/* 3. NÚT BẤM (BUTTONS) - ĐỘ TƯƠNG PHẢN CAO & RÕ NÉT */
+
+/* 3.1. Nút chính Primary (Lưu, Đăng bài, Xác nhận) */
+.btn-publish-trigger,
+.btn-corp-primary,
+button[type="submit"].btn-publish-trigger {
+  background-color: var(--executive-blue) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45) !important;
+}
+
+.btn-publish-trigger:hover,
+.btn-corp-primary:hover,
+button[type="submit"].btn-publish-trigger:hover {
+  background-color: var(--executive-blue-hover) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.6) !important;
+}
+
+/* 3.2. Thanh Tab điều hướng cài đặt (Tab buttons) */
+[data-theme="dark"] .tab-nav-btn,
+body.theme-dark .tab-nav-btn {
+  background-color: #111a2e !important;
+  color: #cbd5e1 !important;
+  border: 1px solid #202d48 !important;
+  font-weight: 700 !important;
+}
+
+[data-theme="dark"] .tab-nav-btn:hover,
+body.theme-dark .tab-nav-btn:hover {
+  background-color: #19243d !important;
+  color: #ffffff !important;
+  border-color: var(--executive-blue) !important;
+}
+
+[data-theme="dark"] .tab-nav-btn.active,
+body.theme-dark .tab-nav-btn.active {
+  background-color: var(--executive-blue) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
+}
+
+/* 3.3. Các nút chọn bảng màu có sẵn (1-Click Presets) */
+[data-theme="dark"] .theme-preset-btn,
+body.theme-dark .theme-preset-btn {
+  background-color: #111a2e !important;
+  border: 2px solid #202d48 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .theme-preset-btn div,
+body.theme-dark .theme-preset-btn div {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .theme-preset-btn div:last-child,
+body.theme-dark .theme-preset-btn div:last-child {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .theme-preset-btn:hover,
+body.theme-dark .theme-preset-btn:hover {
+  border-color: #3b82f6 !important;
+  background-color: #19243d !important;
+}
+
+[data-theme="dark"] .theme-preset-btn.active,
+body.theme-dark .theme-preset-btn.active {
+  border-color: var(--executive-blue) !important;
+  background-color: #19243d !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35) !important;
+}
+
+/* 3.4. Thẻ chọn chế độ giao diện (Mode cards: Light / Dark) */
+[data-theme="dark"] .theme-mode-option,
+body.theme-dark .theme-mode-option {
+  background-color: #111a2e !important;
+  border: 2px solid #202d48 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .theme-mode-option div,
+body.theme-dark .theme-mode-option div {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .theme-mode-option div:last-child,
+body.theme-dark .theme-mode-option div:last-child {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .theme-mode-option.active,
+body.theme-dark .theme-mode-option.active {
+  border-color: var(--executive-blue) !important;
+  background-color: #15223c !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.35) !important;
+}
+
+/* 3.5. Nút bấm chuyên mục / Tag / Filter (Category Pills) */
+[data-theme="dark"] .cat-pill,
+body.theme-dark .cat-pill {
+  background-color: #111a2e !important;
+  color: #cbd5e1 !important;
+  border: 1px solid #202d48 !important;
+}
+
+[data-theme="dark"] .cat-pill:hover,
+body.theme-dark .cat-pill:hover {
+  background-color: #19243d !important;
+  color: #ffffff !important;
+  border-color: var(--executive-blue) !important;
+}
+
+[data-theme="dark"] .cat-pill.active,
+body.theme-dark .cat-pill.active {
+  background-color: var(--executive-blue) !important;
+  border-color: var(--executive-blue) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+}
+
+/* 3.6. Nút chọn bo góc (Radius Option Buttons) */
+[data-theme="dark"] .radius-option-btn,
+body.theme-dark .radius-option-btn {
+  background-color: #111a2e !important;
+  border: 2px solid #202d48 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .radius-option-btn:hover,
+body.theme-dark .radius-option-btn:hover {
+  border-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .radius-option-btn.active,
+body.theme-dark .radius-option-btn.active {
+  border-color: var(--executive-blue) !important;
+  background-color: #19243d !important;
+}
+
+/* 3.7. Nút phụ Secondary / Light / Outline */
+[data-theme="dark"] .btn-light,
+[data-theme="dark"] .btn-corp-outline,
+body.theme-dark .btn-light,
+body.theme-dark .btn-corp-outline {
+  background-color: #19243d !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #202d48 !important;
+}
+
+[data-theme="dark"] .btn-light:hover,
+[data-theme="dark"] .btn-corp-outline:hover,
+body.theme-dark .btn-light:hover,
+body.theme-dark .btn-corp-outline:hover {
+  background-color: #223254 !important;
+  color: #ffffff !important;
+  border-color: var(--executive-blue) !important;
+}
+
+/* 4. Ô NHẬP LIỆU (INPUTS, TEXTAREA, SELECT) */
+[data-theme="dark"] input[type="text"],
+[data-theme="dark"] input[type="email"],
+[data-theme="dark"] input[type="url"],
+[data-theme="dark"] input[type="password"],
+[data-theme="dark"] input[type="search"],
+[data-theme="dark"] textarea,
+[data-theme="dark"] select,
+body.theme-dark input[type="text"],
+body.theme-dark input[type="email"],
+body.theme-dark input[type="url"],
+body.theme-dark input[type="password"],
+body.theme-dark input[type="search"],
+body.theme-dark textarea,
+body.theme-dark select {
+  background-color: #111a2e !important;
+  color: #f8fafc !important;
+  border: 1.5px solid #202d48 !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder,
+body.theme-dark input::placeholder,
+body.theme-dark textarea::placeholder {
+  color: #64748b !important;
+}
+
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="dark"] select:focus,
+body.theme-dark input:focus,
+body.theme-dark textarea:focus,
+body.theme-dark select:focus {
+  border-color: var(--executive-blue) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3) !important;
+  background-color: #15223c !important;
+}
+
+/* 5. CÁC KHỐI THẺ CARD & PANEL */
+[data-theme="dark"] .card,
+[data-theme="dark"] .widget-card,
+[data-theme="dark"] .post-card,
+[data-theme="dark"] .app-sidebar,
+[data-theme="dark"] .site-header,
+[data-theme="dark"] .app-site-footer,
+body.theme-dark .card,
+body.theme-dark .widget-card,
+body.theme-dark .post-card,
+body.theme-dark .app-sidebar,
+body.theme-dark .site-header,
+body.theme-dark .app-site-footer {
+  background-color: #111a2e !important;
+  border-color: #202d48 !important;
+}
+
+/* Footer toolbar lưu cố định ở Cài đặt giao diện */
+[data-theme="dark"] #themeSettingsForm > div:last-child,
+body.theme-dark #themeSettingsForm > div:last-child {
+  background-color: #111a2e !important;
+  border-color: #202d48 !important;
+}
+
+/* Thẻ chọn nhanh ảnh bìa cũ / avatar cũ */
+[data-theme="dark"] .cover-quick-card,
+[data-theme="dark"] .avatar-quick-card,
+body.theme-dark .cover-quick-card,
+body.theme-dark .avatar-quick-card {
+  background-color: #111a2e !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .cover-quick-card.active,
+[data-theme="dark"] .avatar-quick-card.active,
+body.theme-dark .cover-quick-card.active,
+body.theme-dark .avatar-quick-card.active {
+  border-color: var(--executive-blue) !important;
+  background-color: #19243d !important;
+}
+
+[data-theme="dark"] .preset-status-pill,
+body.theme-dark .preset-status-pill {
+  background-color: #19243d !important;
+  color: #94a3b8 !important;
+}
+
+/* 6. BẢNG DỮ LIỆU ADMIN (TABLES) */
+[data-theme="dark"] table,
+body.theme-dark table {
+  color: #cbd5e1 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] thead th,
+body.theme-dark thead th {
+  background-color: #19243d !important;
+  color: #f8fafc !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] tbody tr,
+body.theme-dark tbody tr {
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] tbody tr:hover td,
+body.theme-dark tbody tr:hover td {
+  background-color: #19243d !important;
+}
+
+[data-theme="dark"] tbody td,
+body.theme-dark tbody td {
+  border-color: #202d48 !important;
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] tbody td a,
+[data-theme="dark"] tbody td strong,
+body.theme-dark tbody td a,
+body.theme-dark tbody td strong {
+  color: #f8fafc !important;
+}
+
+/* 7. MODALS & POPUPS */
+[data-theme="dark"] .modal-dialog,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] #proposalDetailModal > div,
+[data-theme="dark"] #viewCommentModal > div,
+body.theme-dark .modal-dialog,
+body.theme-dark .modal-content,
+body.theme-dark #proposalDetailModal > div,
+body.theme-dark #viewCommentModal > div {
+  background-color: #111a2e !important;
+  color: #cbd5e1 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer,
+body.theme-dark .modal-header,
+body.theme-dark .modal-footer {
+  background-color: #19243d !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] #modalMessageContent,
+body.theme-dark #modalMessageContent {
+  background-color: #19243d !important;
+  color: #cbd5e1 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] #modalAttachmentWrapper,
+body.theme-dark #modalAttachmentWrapper {
+  background-color: #19243d !important;
+  border-color: #202d48 !important;
+}
+
+/* 8. BÀI VIẾT & LINK PREVIEW NGOÀI TRANG CHỦ */
+[data-theme="dark"] .post-image-placeholder,
+body.theme-dark .post-image-placeholder {
+  background-color: #162035 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .attached-preview-box,
+body.theme-dark .attached-preview-box {
+  background-color: #111a2e !important;
+  border-color: #202d48 !important;
+  border-left-color: var(--executive-blue) !important;
+}
+
+[data-theme="dark"] .attached-preview-box:hover,
+body.theme-dark .attached-preview-box:hover {
+  background-color: #19243d !important;
+  border-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] .btn-read-orig-link,
+body.theme-dark .btn-read-orig-link {
+  color: var(--executive-blue) !important;
+}
+
+[data-theme="dark"] .preview-tab-icon-box,
+body.theme-dark .preview-tab-icon-box {
+  background-color: #0b1120 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .preview-title-text,
+body.theme-dark .preview-title-text {
+  color: #f8fafc !important;
+}
+
+/* 9. MỤC LIÊN HỆ & MẠNG XÃ HỘI */
+[data-theme="dark"] .social-link-item,
+body.theme-dark .social-link-item {
+  background-color: #19243d !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .social-tab-icon-box,
+body.theme-dark .social-tab-icon-box {
+  background-color: #111a2e !important;
+  border-color: #202d48 !important;
+}
+
+/* 10. MENU SIDEBAR & GÓC DOANH NGHIỆP */
+[data-theme="dark"] .nav-item,
+body.theme-dark .nav-item {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .nav-item:hover,
+body.theme-dark .nav-item:hover {
+  background-color: #19243d !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .nav-item.active,
+body.theme-dark .nav-item.active {
+  background-color: rgba(37, 99, 235, 0.22) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .brand-box,
+body.theme-dark .brand-box {
+  border-bottom-color: #202d48 !important;
+}
+
+/* Hộp Góc doanh nghiệp trong Dark Mode */
+[data-theme="dark"] .community-note-box,
+body.theme-dark .community-note-box {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.14), rgba(17, 26, 46, 0.95)) !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35) !important;
+}
+
+[data-theme="dark"] .community-note-box:hover,
+body.theme-dark .community-note-box:hover {
+  border-color: rgba(96, 165, 250, 0.6) !important;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25) !important;
+}
+
+[data-theme="dark"] .community-note-title,
+body.theme-dark .community-note-title {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .community-note-icon,
+body.theme-dark .community-note-icon {
+  background-color: rgba(37, 99, 235, 0.25) !important;
+  color: #60a5fa !important;
+}
+
+[data-theme="dark"] .community-note-desc,
+body.theme-dark .community-note-desc {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .sidebar-social-connect,
+body.theme-dark .sidebar-social-connect {
+  border-top-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .social-connect-btn,
+body.theme-dark .social-connect-btn {
+  background: #15223c !important;
+  border: 1px solid #233354 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25) !important;
+}
+
+[data-theme="dark"] .social-connect-btn:hover,
+body.theme-dark .social-connect-btn:hover {
+  background: #1e293b !important;
+  border-color: #60a5fa !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35) !important;
+}
+
+[data-theme="dark"] .icon-align-left .bar,
+body.theme-dark .icon-align-left .bar {
+  background-color: #f8fafc !important;
+}
+
+/* 11. GHI ĐÈ TOÀN BỘ CÁC INLINE STYLE MÀU TRẮNG / ĐEN CỨNG KHI SANG DARK MODE */
+[data-theme="dark"] [style*="background: #ffffff"],
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background-color: #ffffff"],
+[data-theme="dark"] [style*="background-color: #fff"],
+[data-theme="dark"] [style*="background: white"],
+body.theme-dark [style*="background: #ffffff"],
+body.theme-dark [style*="background: #fff"],
+body.theme-dark [style*="background-color: #ffffff"],
+body.theme-dark [style*="background-color: #fff"],
+body.theme-dark [style*="background: white"] {
+  background-color: #111a2e !important;
+}
+
+[data-theme="dark"] [style*="background: #f8fafc"],
+[data-theme="dark"] [style*="background: #f1f5f9"],
+[data-theme="dark"] [style*="background-color: #f8fafc"],
+[data-theme="dark"] [style*="background-color: #f1f5f9"],
+body.theme-dark [style*="background: #f8fafc"],
+body.theme-dark [style*="background: #f1f5f9"],
+body.theme-dark [style*="background-color: #f8fafc"],
+body.theme-dark [style*="background-color: #f1f5f9"] {
+  background-color: #19243d !important;
+}
+
+[data-theme="dark"] [style*="color: #0f172a"],
+[data-theme="dark"] [style*="color: #1e293b"],
+[data-theme="dark"] [style*="color: #334155"],
+[data-theme="dark"] [style*="color: var(--obsidian)"],
+[data-theme="dark"] [style*="color: var(--text-title)"],
+body.theme-dark [style*="color: #0f172a"],
+body.theme-dark [style*="color: #1e293b"],
+body.theme-dark [style*="color: #334155"],
+body.theme-dark [style*="color: var(--obsidian)"],
+body.theme-dark [style*="color: var(--text-title)"] {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] [style*="border: 1px solid #e2e8f0"],
+[data-theme="dark"] [style*="border: 1px solid #cbd5e1"],
+[data-theme="dark"] [style*="border: 1.5px solid #cbd5e1"],
+[data-theme="dark"] [style*="border: 2px solid #e2e8f0"],
+[data-theme="dark"] [style*="border: 2px solid #cbd5e1"],
+body.theme-dark [style*="border: 1px solid #e2e8f0"],
+body.theme-dark [style*="border: 1px solid #cbd5e1"],
+body.theme-dark [style*="border: 1.5px solid #cbd5e1"],
+body.theme-dark [style*="border: 2px solid #e2e8f0"],
+body.theme-dark [style*="border: 2px solid #cbd5e1"] {
+  border-color: #202d48 !important;
+}
+
+/* 10. TRUNG TÂM THÔNG BÁO CHO ADMIN TRONG GIAO DIỆN TỐI (OBSIDIAN DARK) */
+[data-theme="dark"] .proposal-table-row,
+body.theme-dark .proposal-table-row {
+  border-bottom-color: #1a253c !important;
+}
+
+[data-theme="dark"] .proposal-table-row:hover,
+body.theme-dark .proposal-table-row:hover {
+  background-color: #16223a !important;
+}
+
+[data-theme="dark"] .notif-dropdown-menu,
+body.theme-dark .notif-dropdown-menu {
+  background: #0d1527 !important;
+  border-color: #202d48 !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+[data-theme="dark"] .notif-header,
+body.theme-dark .notif-header {
+  background: #0d1527 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .notif-filter-tabs,
+[data-theme="dark"] .notif-footer,
+body.theme-dark .notif-filter-tabs,
+body.theme-dark .notif-footer {
+  background: #080d19 !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .notif-tab,
+body.theme-dark .notif-tab {
+  color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .notif-tab:hover,
+body.theme-dark .notif-tab:hover {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+[data-theme="dark"] .notif-tab.active,
+body.theme-dark .notif-tab.active {
+  background: #19243d !important;
+  color: #60a5fa !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .notif-item,
+body.theme-dark .notif-item {
+  border-color: #162036 !important;
+}
+
+[data-theme="dark"] .notif-item:hover,
+body.theme-dark .notif-item:hover {
+  background: #141e33 !important;
+}
+
+[data-theme="dark"] .notif-item.unread,
+body.theme-dark .notif-item.unread {
+  background: rgba(37, 99, 235, 0.12) !important;
+}
+
+[data-theme="dark"] .notif-item-author,
+body.theme-dark .notif-item-author {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .notif-item-content,
+body.theme-dark .notif-item-content {
+  color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .notif-item-subtext,
+[data-theme="dark"] .notif-item-time,
+body.theme-dark .notif-item-subtext,
+body.theme-dark .notif-item-time {
+  color: #8da2c0 !important;
+}
+
+/* 11. FORM ĐỔI MẬT KHẨU ADMIN TRONG GIAO DIỆN TỐI */
+[data-theme="dark"] #adminPasswordChangeForm input,
+body.theme-dark #adminPasswordChangeForm input {
+  background-color: #0b1120 !important;
+  color: #f8fafc !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] #adminPasswordChangeForm input:focus,
+body.theme-dark #adminPasswordChangeForm input:focus {
+  border-color: #3b82f6 !important;
+}
+
+[data-theme="dark"] #btnChangePasswordSubmit,
+body.theme-dark #btnChangePasswordSubmit {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* 12. MOBILE SIDEBAR DRAWER TRONG GIAO DIỆN TỐI */
+[data-theme="dark"] .btn-mobile-sidebar-toggle,
+[data-theme="dark"] .btn-sidebar-close-mobile,
+body.theme-dark .btn-mobile-sidebar-toggle,
+body.theme-dark .btn-sidebar-close-mobile {
+  background-color: #141e33 !important;
+  color: #f8fafc !important;
+  border-color: #202d48 !important;
+}
+
+[data-theme="dark"] .mobile-topbar-brand,
+body.theme-dark .mobile-topbar-brand {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .app-sidebar,
+body.theme-dark .app-sidebar {
+  background-color: #0b1120 !important;
+  border-right-color: #202d48 !important;
+}
+
+
+
+

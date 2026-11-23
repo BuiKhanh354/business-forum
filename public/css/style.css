@@ -1,0 +1,32 @@
+/* ==========================================================================
+   KẾT NỐI BUSINESS COMMUNITY - CORE STYLESHEET (MODULAR HUB)
+   Phong cách: Modern Executive Dashboard / Community UI
+   Kiến trúc: Modular CSS phân tách theo từng khối thành phần hệ thống
+   ========================================================================== */
+
+/* 1. Biến CSS & Design System & Themes */
+@import 'variables.css';
+
+/* 2. Bố cục chung & Khung trang & Footer & Responsive */
+@import 'layout.css';
+
+/* 3. Thanh điều hướng Sidebar & Submenu & Icon */
+@import 'sidebar.css';
+
+/* 4. Các thành phần giao diện dùng chung (Modal, Button, Input...) */
+@import 'components.css';
+
+/* 5. Khối bài viết, Feed, Bộ lọc chuyên mục, Chi tiết bài viết */
+@import 'posts.css';
+
+/* 6. Các Widget bên phải & Đối tác & Giới thiệu */
+@import 'widgets.css';
+
+/* 7. Trang Liên hệ & Thư ngỏ hợp tác & Khối kết nối Admin */
+@import 'contact.css';
+
+/* 8. Giao diện Quản trị viên, Customizer, Mockup & Cài đặt */
+@import 'admin.css';
+
+/* 9. Giao diện Tối Toàn diện (Obsidian Dark Mode System) */
+@import 'dark-theme.css';

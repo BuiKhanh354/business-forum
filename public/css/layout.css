@@ -1,0 +1,694 @@
+/* ==========================================================================
+   BỐ CỤC CHUNG: SIDEBAR TRÁI (260px) + MAIN CONTENT
+   ========================================================================== */
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   MAIN CONTENT AREA
+   ========================================================================== */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* TOPBAR: SEARCH & EXECUTIVE ADMIN PROFILE */
+.main-topbar {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-card);
+  padding: 0.85rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+
+/* ==========================================================================
+   MEDIAN UI SEARCH BAR (THANH TÌM KIẾM CHUẨN MEDIAN UI)
+   ========================================================================== */
+.topbar-search-box,
+.topbar-search-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+}
+
+.topbar-search-box input,
+.topbar-search-wrap input,
+.topbar-search-input {
+  width: 100%;
+  height: 38px;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  padding: 0 2.85rem 0 2.45rem;
+  font-size: 0.86rem;
+  font-family: var(--font-family);
+  color: var(--text-title);
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.topbar-search-box input::placeholder,
+.topbar-search-wrap input::placeholder,
+.topbar-search-input::placeholder {
+  color: var(--text-light-muted);
+  font-weight: 500;
+}
+
+.topbar-search-box input:focus,
+.topbar-search-wrap input:focus,
+.topbar-search-input:focus {
+  background-color: var(--bg-card);
+  border-color: var(--executive-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.topbar-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light-muted);
+  font-size: 0.88rem;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.topbar-kbd-shortcut {
+  position: absolute;
+  right: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-light-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  pointer-events: none;
+  line-height: 1.2;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+
+.topbar-user-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.topbar-status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gold-accent);
+  background-color: var(--gold-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.5px;
+}
+
+.topbar-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--obsidian), var(--executive-blue));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+  overflow: hidden;
+}
+
+.topbar-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.topbar-username {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-title);
+}
+
+/* ==========================================================================
+   SCROLLABLE CONTENT AREA
+   ========================================================================== */
+.main-content-scroll {
+  padding: 2rem;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* HEADER TIÊU ĐỀ: BUSINESS COMMUNITY & PHÂN QUYỀN */
+.content-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.forum-main-title {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: var(--obsidian);
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+}
+
+.forum-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.admin-only-badge {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--executive-blue);
+  background-color: var(--executive-blue-light);
+  border: 1px solid var(--executive-blue-border);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.btn-publish-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: linear-gradient(135deg, var(--obsidian), #1e3a8a);
+  color: white;
+  border: none;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
+  transition: var(--transition);
+}
+
+.btn-publish-trigger:hover {
+  background: linear-gradient(135deg, #1e293b, var(--executive-blue));
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   EXECUTIVE HERO COVER BANNER (CHUẨN BUSINESS COMMUNITY - LỚN & ĐẲNG CẤP)
+   ========================================================================== */
+.hero-cover-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 65%, #1e3a8a 100%);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px !important; /* THEO YÊU CẦU: BORDER RADIUS 5PX */
+  min-height: 280px; /* HỖ TRỢ LINH HOẠT TỪ GỌN GÀNG 280PX TỚI HÙNG VĨ 420PX */
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), min-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s ease;
+}
+
+.btn-change-cover {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.45rem 0.95rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.btn-change-cover:hover {
+  background: var(--executive-blue);
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.hero-cover-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: radial-gradient(circle at 70% 30%, rgba(217, 119, 6, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+.cover-tag {
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fde68a;
+  letter-spacing: 1.5px;
+  background-color: rgba(217, 119, 6, 0.2);
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  padding: 0.3rem 0.95rem;
+  border-radius: 5px !important;
+}
+
+.cover-headline {
+  font-size: 2.15rem;
+  font-weight: 900;
+  color: white;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+}
+
+.cover-subtext {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   BỐ CỤC 2 CỘT: CỘT BÀI VIẾT (70%) + SIDEBAR DOANH NGHIỆP (30%)
+   ========================================================================== */
+.forum-body-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* FEED HEADER & BỘ LỌC CHUYÊN MỤC DOANH NGHIỆP */
+.feed-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.feed-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--obsidian);
+}
+
+.sort-dropdown-trigger {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-weight: 700;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+}
+
+.sort-dropdown-trigger:hover,
+.sort-dropdown-trigger[aria-expanded="true"] {
+  color: var(--executive-blue);
+  border-color: var(--executive-blue);
+  background: var(--bg-subtle);
+}
+
+.sort-opt-btn {
+  width: 100%;
+  padding: 0.55rem 0.95rem;
+  background: none;
+  border: none;
+  color: var(--text-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sort-opt-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--executive-blue);
+}
+
+.sort-opt-btn.active {
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--executive-blue);
+  font-weight: 700;
+}
+
+.feed-sort-dropdown,
+.cat-more-dropdown {
+  animation: feedFadeDown 0.18s ease-out;
+}
+
+@keyframes feedFadeDown {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cat-more-btn:hover {
+  background: var(--bg-subtle);
+  border-color: var(--executive-blue);
+}
+
+.cat-more-btn.active {
+  background: var(--executive-blue) !important;
+  color: #ffffff !important;
+  border-color: var(--executive-blue) !important;
+  border-style: solid !important;
+}
+
+.cat-dropdown-item:hover {
+  background: var(--bg-subtle) !important;
+  color: var(--executive-blue) !important;
+}
+
+.cat-dropdown-item.active {
+  background: rgba(37, 99, 235, 0.1) !important;
+  color: var(--executive-blue) !important;
+  font-weight: 700 !important;
+}
+
+.category-filter-bar {
+  margin-bottom: 1.5rem;
+}
+
+.category-filter-label {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--obsidian);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.65rem;
+}
+
+.category-pills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cat-pill {
+  border: 1px solid var(--border-card);
+  background-color: var(--bg-card);
+  color: var(--text-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.cat-pill:hover {
+  background-color: var(--bg-subtle);
+  border-color: #cbd5e1;
+  color: var(--obsidian);
+}
+
+.cat-pill.active {
+  background-color: var(--obsidian);
+  border-color: var(--obsidian);
+  color: white;
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-mobile-sidebar-toggle {
+  display: none;
+}
+.mobile-topbar-brand {
+  display: none;
+}
+.btn-sidebar-close-mobile {
+  display: none;
+}
+.sidebar-backdrop {
+  display: none;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .forum-body-grid {
+    grid-template-columns: 1fr;
+  }
+  .right-sidebar-panel {
+    position: static;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+  }
+  .app-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 285px !important;
+    min-width: 285px !important;
+    max-width: 82vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    z-index: 99999 !important;
+    background-color: var(--bg-card, #ffffff) !important;
+    border-right: 1px solid var(--border-card) !important;
+    border-bottom: none !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    transform: translateX(-100%) !important;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease !important;
+    box-shadow: none !important;
+  }
+  body.sidebar-open .app-sidebar,
+  .app-sidebar.show-mobile {
+    transform: translateX(0) !important;
+    box-shadow: 10px 0 50px rgba(0, 0, 0, 0.4) !important;
+  }
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 99998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  body.sidebar-open .sidebar-backdrop,
+  .sidebar-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .app-main {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+  .main-content-scroll {
+    padding: 1rem;
+    padding-bottom: 75px;
+  }
+  .main-topbar {
+    padding: 0.65rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .btn-mobile-sidebar-toggle {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--bg-subtle, #f1f5f9);
+    border: 1px solid var(--border-card);
+    color: var(--text-title);
+    cursor: pointer;
+    font-size: 1.05rem;
+  }
+  .mobile-topbar-brand {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: var(--text-title);
+    font-weight: 800;
+    font-size: 1.05rem;
+    letter-spacing: -0.3px;
+  }
+  .desktop-breadcrumb {
+    display: none !important;
+  }
+  .btn-sidebar-close-mobile {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    background: var(--bg-subtle, #f1f5f9);
+    border: 1px solid var(--border-card);
+    color: var(--text-title);
+    cursor: pointer;
+    font-size: 0.95rem;
+    margin-left: auto;
+  }
+  .topbar-search-box {
+    display: none;
+  }
+  .attached-preview-box {
+    flex-direction: column;
+  }
+  .preview-thumb-img-wrap {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 180px;
+  }
+  .hero-cover-card {
+    padding: 2.5rem 1.5rem;
+  }
+  .cover-headline {
+    font-size: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   CHÂN TRANG (FOOTER) RESPONSIVE STYLES
+   ========================================================================== */
+.app-site-footer {
+  margin-top: 3.5rem;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-card);
+  padding: 3rem 1.75rem 2rem 1.75rem;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.footer-grid-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media (max-width: 992px) {
+  .footer-grid-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .app-site-footer {
+    padding: 2rem 1rem 1.5rem 1rem;
+    margin-top: 2rem;
+  }
+}
+
+/* ==========================================================================
+   TOAST THÔNG BÁO NỔI TOÀN HỆ THỐNG (CHUẨN EXECUTIVE MEDIAN UI)
+   ========================================================================== */
+.global-system-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(15, 23, 42, 0.94);
+  color: #ffffff;
+  padding: 0.75rem 1.45rem;
+  border-radius: 9999px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28), 0 4px 10px rgba(0, 0, 0, 0.12);
+  z-index: 99999;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  animation: toastBottomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.global-system-toast .toast-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.global-system-toast .toast-inner i {
+  color: #10b981;
+  font-size: 1.1rem;
+}
+
+.global-system-toast.toast-error .toast-inner i {
+  color: #ef4444;
+}
+
+.global-system-toast.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(14px);
+  transition: all 0.25s ease;
+}
+
+@keyframes toastBottomIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+

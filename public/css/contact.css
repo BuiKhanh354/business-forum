@@ -1,0 +1,1027 @@
+/* ==========================================================================
+   TRANG LIÊN HỆ & KẾT NỐI HỢP TÁC DOANH NGHIỆP (CONTACT.HTML)
+   ========================================================================== */
+.contact-hero-banner {
+  background: linear-gradient(135deg, #0b1528 0%, #172554 50%, #1e3a8a 100%);
+  border-radius: var(--radius-md);
+  padding: 2.25rem 2.5rem;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-hero-banner::after {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(217, 119, 6, 0.2) 0%, rgba(37, 99, 235, 0) 70%);
+  pointer-events: none;
+}
+
+.contact-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  color: var(--gold-accent);
+  background: rgba(217, 119, 6, 0.15);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 1rem;
+}
+
+.contact-hero-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+.contact-hero-subtitle {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  max-width: 780px;
+  line-height: 1.6;
+}
+
+/* 4 Thẻ chỉ số nổi bật */
+.contact-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.contact-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.contact-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.contact-stat-icon.blue {
+  background: #eff6ff;
+  color: var(--executive-blue);
+}
+
+.contact-stat-icon.amber {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.contact-stat-icon.emerald {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.contact-stat-icon.purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
+
+.contact-stat-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-title);
+  line-height: 1.2;
+}
+
+.contact-stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+/* Bố cục 2 cột chính */
+.contact-layout-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr;
+  gap: 1.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.contact-card-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-box-header {
+  border-bottom: 1px solid var(--border-card);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-box-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-title);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.contact-box-subtitle {
+  font-size: 0.86rem;
+  color: var(--text-muted);
+  margin-top: 0.35rem;
+}
+
+/* Form Styles */
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.contact-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.15rem;
+}
+
+.contact-form-label {
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--text-title);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-form-label .req {
+  color: #dc2626;
+  font-weight: 900;
+}
+
+.contact-form-input,
+.contact-form-select,
+.contact-form-textarea {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: var(--text-title);
+  background: var(--bg-card);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: inherit;
+  outline: none;
+}
+
+.contact-form-input:focus,
+.contact-form-select:focus,
+.contact-form-textarea:focus {
+  border-color: var(--executive-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.contact-form-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Upload zone */
+.contact-upload-zone {
+  border: 2px dashed var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+  text-align: center;
+  background: var(--bg-subtle);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.contact-upload-zone:hover {
+  border-color: var(--executive-blue);
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.contact-upload-icon {
+  font-size: 1.6rem;
+  color: var(--executive-blue);
+  margin-bottom: 0.4rem;
+}
+
+.contact-upload-text {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-title);
+}
+
+.contact-upload-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+/* Checkbox */
+.contact-consent-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+.contact-consent-row input[type="checkbox"] {
+  margin-top: 0.15rem;
+  accent-color: var(--executive-blue);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* Form Action Buttons */
+.contact-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.btn-contact-submit {
+  background: var(--executive-blue);
+  color: #ffffff;
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-contact-submit:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+}
+
+.btn-contact-reset {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.75rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-card);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-contact-reset:hover {
+  background: var(--bg-subtle);
+  color: var(--text-title);
+}
+
+/* Cột phải: Thông tin liên hệ trực tiếp */
+.contact-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.contact-info-icon-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--executive-blue);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.contact-info-label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.contact-info-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-title);
+  line-height: 1.45;
+}
+
+.contact-info-value a {
+  color: var(--executive-blue);
+  text-decoration: none;
+}
+
+.contact-info-value a:hover {
+  text-decoration: underline;
+}
+
+/* Kênh mạng xã hội Business */
+.contact-social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.contact-social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  color: var(--text-title);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.contact-social-btn:hover {
+  background: #ffffff;
+  border-color: var(--executive-blue);
+  color: var(--executive-blue);
+  transform: translateY(-1px);
+}
+
+/* Interactive FAQ List */
+.contact-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.contact-faq-item {
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--bg-subtle);
+  transition: border-color 0.2s;
+}
+
+.contact-faq-item.active {
+  border-color: var(--executive-blue);
+  background: var(--bg-card);
+}
+
+.contact-faq-question {
+  padding: 0.85rem 1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-title);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  user-select: none;
+}
+
+.contact-faq-question:hover {
+  color: var(--executive-blue);
+}
+
+.contact-faq-arrow {
+  transition: transform 0.2s ease;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.contact-faq-item.active .contact-faq-arrow {
+  transform: rotate(180deg);
+  color: var(--executive-blue);
+}
+
+.contact-faq-answer {
+  display: none;
+  padding: 0 1rem 0.95rem 1rem;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  border-top: 1px dashed var(--border-card);
+  padding-top: 0.75rem;
+}
+
+.contact-faq-item.active .contact-faq-answer {
+  display: block;
+}
+
+/* Map Card */
+.contact-map-card {
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-card);
+  background: #0f172a;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-map-mock {
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)),
+    repeating-linear-gradient(45deg, #1e293b, #1e293b 10px, #0f172a 10px, #0f172a 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+  color: #ffffff;
+}
+
+.contact-map-pin {
+  width: 48px;
+  height: 48px;
+  background: var(--gold-accent);
+  color: #0f172a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 0 20px rgba(217, 119, 6, 0.6);
+  animation: pulse-pin 2s infinite;
+}
+
+@keyframes pulse-pin {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 14px rgba(217, 119, 6, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
+}
+
+.contact-map-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.contact-map-subtitle {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin-bottom: 0.75rem;
+}
+
+.btn-open-map {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-open-map:hover {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* Modal xác nhận gửi thư ngỏ thành công */
+.contact-success-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.contact-success-modal {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  max-width: 520px;
+  width: 100%;
+  border: 1px solid var(--border-card);
+  padding: 2.25rem;
+  text-align: center;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+  animation: modal-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-pop {
+  from { opacity: 0; transform: scale(0.92) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.contact-success-icon-wrap {
+  width: 68px;
+  height: 68px;
+  background: #ecfdf5;
+  color: #059669;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1.25rem auto;
+  border: 2px solid #a7f3d0;
+}
+
+.contact-ticket-pill {
+  display: inline-block;
+  background: var(--bg-subtle);
+  border: 1px dashed var(--border-card);
+  padding: 0.35rem 0.85rem;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--executive-blue);
+  margin: 0.85rem 0 1.25rem 0;
+}
+
+/* Responsive cho trang Liên Hệ */
+@media (max-width: 1024px) {
+  .contact-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+  .contact-social-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-hero-banner {
+    padding: 1.5rem;
+  }
+  .contact-hero-title {
+    font-size: 1.4rem;
+  }
+}
+
+/* ==========================================================================
+   DIV KẾT NỐI LIÊN HỆ: 1 BÊN LÀ HÌNH ADMIN - 1 BÊN LÀ THÔNG TIN & FORM (EXECUTIVE SPLIT)
+   ========================================================================== */
+.admin-connect-hero-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2.25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.admin-connect-hero-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--executive-blue) 0%, var(--gold-accent) 50%, var(--executive-blue) 100%);
+}
+
+.admin-connect-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  align-items: stretch;
+}
+
+/* CỘT TRÁI: HÌNH ẢNH ADMIN & PROFILE VẮN TẮT */
+.admin-photo-col {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.04) 0%, rgba(15, 23, 42, 0.08) 100%);
+  border-right: 1px solid var(--border-card);
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.admin-portrait-wrap {
+  position: relative;
+  width: 200px;
+  height: 240px;
+  margin-bottom: 1.25rem;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.admin-portrait-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px !important; /* THEO YÊU CẦU: BORDER RADIUS 5PX */
+  object-fit: cover;
+  border: 2px solid var(--border-card);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.admin-portrait-wrap:hover .admin-portrait-img {
+  transform: scale(1.03);
+}
+
+.admin-change-photo-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.3rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+.admin-change-photo-btn:hover {
+  background: var(--executive-blue);
+  border-color: #ffffff;
+}
+
+.admin-online-indicator {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 18px;
+  height: 18px;
+  background-color: #10b981;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  title: "Đang trực tiếp nhận kết nối";
+}
+
+.admin-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #0f172a;
+  color: var(--gold-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.65rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.admin-name-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--text-title);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.3px;
+}
+
+.admin-title-sub {
+  font-size: 0.84rem;
+  color: var(--executive-blue);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.admin-quote-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-left: 3px solid var(--gold-accent);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1rem;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  text-align: left;
+  position: relative;
+}
+
+.admin-mini-stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  border-top: 1px dashed var(--border-card);
+  border-bottom: 1px dashed var(--border-card);
+  padding: 0.75rem 0;
+}
+
+.admin-mini-stat-item {
+  text-align: center;
+}
+
+.admin-mini-stat-num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-title);
+}
+
+.admin-mini-stat-lbl {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.admin-social-pills-list {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.admin-social-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-title);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.admin-social-pill:hover {
+  background: var(--executive-blue);
+  color: #ffffff;
+  border-color: var(--executive-blue);
+  transform: translateY(-2px);
+}
+
+/* CỘT PHẢI: LỜI CHÀO & FORM LIÊN HỆ TRỰC TIẾP ("VÀ GÌ ĐÓ") */
+.admin-info-col {
+  padding: 2.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.admin-welcome-top {
+  margin-bottom: 1.25rem;
+}
+
+.admin-connect-tagline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.65px;
+  color: var(--gold-accent);
+  margin-bottom: 0.45rem;
+}
+
+.admin-welcome-headline {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-title);
+  line-height: 1.3;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.3px;
+}
+
+.admin-welcome-paragraph {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* 3 Kênh tóm tắt nhanh */
+.admin-direct-channels-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin: 1.25rem 0 1.5rem 0;
+}
+
+.admin-channel-badge {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.admin-channel-badge i {
+  font-size: 1.15rem;
+  color: var(--executive-blue);
+}
+
+.admin-channel-badge-text {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.admin-channel-badge-val {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-title);
+  margin-top: 0.15rem;
+}
+
+/* Form nhắn tin trực tiếp nhanh bên trong div */
+.admin-quick-message-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+
+.admin-quick-message-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-title);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.85rem;
+}
+
+.admin-quick-grid-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-quick-input,
+.admin-quick-textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-card);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: var(--bg-card);
+  color: var(--text-title);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.admin-quick-input:focus,
+.admin-quick-textarea:focus {
+  border-color: var(--executive-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.admin-quick-textarea {
+  min-height: 75px;
+  resize: vertical;
+  margin-bottom: 0.85rem;
+  line-height: 1.45;
+}
+
+.admin-quick-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-reply-time-note {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-send-admin-quick {
+  background: var(--executive-blue);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.35rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-send-admin-quick:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Responsive cho Khung Kết nối Admin */
+@media (max-width: 960px) {
+  .admin-connect-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-photo-col {
+    border-right: none;
+    border-bottom: 1px solid var(--border-card);
+    padding: 2rem 1.5rem;
+  }
+  .admin-info-col {
+    padding: 1.75rem 1.5rem;
+  }
+  .admin-direct-channels-row {
+    grid-template-columns: 1fr;
+  }
+  .admin-quick-grid-inputs {
+    grid-template-columns: 1fr;
+  }
+}
+
