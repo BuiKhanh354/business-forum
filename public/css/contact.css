@@ -1025,3 +1025,27 @@
   }
 }
 
+
+
+/* ==========================================================================
+   QUẢN LÝ ĐỀ XUẤT HỢP TÁC: GHI CHÚ NỘI BỘ & BADGES
+   ========================================================================== */
+.proposal-admin-notes-badge {
+  background: #fefce8;
+  border-left: 3px solid #ca8a04;
+  color: #854d0e;
+}
+.modal-admin-notes-box {
+  background: #fffbeb;
+  border: 1px solid #fef3c7;
+}
+.modal-admin-notes-box label {
+  color: #92400e;
+}
+.modal-admin-notes-box span {
+  color: #b45309;
+}
+.proposal-company-badge {
+  background: #eff6ff;
+  color: var(--executive-blue);
+}
