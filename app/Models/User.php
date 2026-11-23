@@ -48,4 +48,20 @@ class User extends Authenticatable
         'password' => 'hashed',
         'avatar_history' => 'array',
     ];
+
+    /**
+     * Đường dẫn ảnh đại diện an toàn (tự động fallback về ảnh mặc định nếu file không tồn tại)
+     */
+    public function getAvatarUrlAttribute(): string
+    {
+        if (!empty($this->avatar)) {
+            if (str_starts_with($this->avatar, 'http://') || str_starts_with($this->avatar, 'https://')) {
+                return $this->avatar;
+            }
+            if (file_exists(public_path($this->avatar))) {
+                return asset($this->avatar);
+            }
+        }
+        return asset('assets/images/admin-khanh.jpg');
+    }
 }

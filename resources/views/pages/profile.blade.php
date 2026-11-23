@@ -19,7 +19,7 @@
         <!-- CỘT TRÁI: THẺ TÓM TẮT HỒ SƠ ADMIN -->
         <div class="widget-card" style="padding: 2.5rem 1.5rem; text-align: center; border: 1px solid var(--border-card); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
             <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 1.25rem; overflow: hidden; border: 3px solid var(--executive-blue); box-shadow: 0 4px 14px rgba(37,99,235,0.2);">
-                <img src="{{ asset($user->avatar ?? 'assets/images/admin-khanh.jpg') }}" id="profileLeftAvatar" alt="Ảnh đại diện Admin" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="{{ $user->avatar_url ?? asset('assets/images/admin-khanh.jpg') }}" id="profileLeftAvatar" alt="Ảnh đại diện Admin" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
             </div>
             <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.35rem;" id="leftDisplayName">
                 {{ $user->name ?? 'Admin Khánh' }}
@@ -70,7 +70,7 @@
                 <div class="avatar-profile-manager-box" style="margin-bottom: 1.75rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.5rem;">
                     <div class="avatar-current-row" style="display: flex; align-items: center; gap: 1.25rem; margin-bottom: 1.25rem;">
                         <div class="avatar-current-preview" style="width: 72px; height: 72px; border-radius: 50%; overflow: hidden; border: 2px solid var(--executive-blue); flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                            <img src="{{ asset($user->avatar ?? 'assets/images/admin-khanh.jpg') }}" id="profileRowAvatar" alt="Ảnh đại diện Admin" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="{{ $user->avatar_url ?? asset('assets/images/admin-khanh.jpg') }}" id="profileRowAvatar" alt="Ảnh đại diện Admin" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
                         </div>
                         <div class="avatar-current-info" style="flex: 1;">
                             <div class="avatar-current-title" style="font-size: 0.95rem; font-weight: 800; color: var(--text-title); margin-bottom: 0.25rem;">

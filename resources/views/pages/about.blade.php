@@ -25,7 +25,7 @@
             <!-- CỘT TRÁI: HÌNH ẢNH & THÔNG TIN HỒ SƠ ADMIN KHÁNH (ĐỒNG BỘ TỪ DATABASE) -->
             <div class="admin-photo-col">
                 <div class="admin-portrait-wrap">
-                    <img src="{{ asset($founder->avatar ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $founder->name ?? 'Admin Khánh' }} - {{ $founder->role_title ?? 'Founder KẾT NỐI' }}" class="admin-portrait-img" id="adminPortraitImgAbout" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80'">                </div>
+                    <img src="{{ $founder->avatar_url ?? asset('assets/images/admin-khanh.jpg') }}" alt="{{ $founder->name ?? 'Admin Khánh' }} - {{ $founder->role_title ?? 'Founder KẾT NỐI' }}" class="admin-portrait-img" id="adminPortraitImgAbout" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">                </div>
 
                 <span class="admin-role-badge">
                     <i class="fa-solid fa-crown" style="font-size: 0.7rem;"></i> {{ strtoupper($founder->role_title ?? 'FOUNDER & QUẢN TRỊ VIÊN') }}

@@ -29,8 +29,8 @@
     <!-- CỘT CHI TIẾT BÀI ĐĂNG (ĐỒNG BỘ 100% DATABASE) -->
     <article class="post-card" style="padding: 2rem;">
       <div class="post-header-author">
-        <div class="author-circle-avatar" style="overflow: hidden; border: 2px solid var(--gold-accent);">
-          <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? $currentUser?->name ?? 'Admin' }}" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="author-circle-avatar" style="overflow: hidden; border: 2px solid var(--gold-accent); flex-shrink: 0;">
+          <img src="{{ $authorUser?->avatar_url ?? $currentUser?->avatar_url ?? asset('assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? $currentUser?->name ?? 'Admin' }}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
         </div>
         <div class="author-meta-info">
           <div class="author-name-row">
@@ -268,7 +268,7 @@
                      style="{{ $isAuthorLiked ? 'display: inline-flex;' : 'display: none;' }}" 
                      title="Bình luận này đã được tác giả ({{ $authorUser?->name ?? 'Admin' }}) thả tim">
                   <div class="author-liked-avatar-wrap">
-                    <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="Tác giả">
+                    <img src="{{ $authorUser?->avatar_url ?? $currentUser?->avatar_url ?? asset('assets/images/admin-khanh.jpg') }}" alt="Tác giả" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
                     <i class="fa-solid fa-heart badge-heart-icon"></i>
                   </div>
                   <span>Tác giả đã thích</span>
@@ -292,7 +292,7 @@
       <div class="median-author-widget">
         <div class="median-author-cover" style="background-image: url('{{ asset($siteSettings['cover_desktop'] ?? 'assets/images/cover-banner.jpg') }}'); background-size: cover; background-position: center; height: 54px; margin: -1.15rem -1.15rem 0 -1.15rem;"></div>
         <div class="median-author-avatar-wrap">
-          <img src="{{ asset(($authorUser?->avatar ?? $currentUser?->avatar) ?? 'assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? 'Admin Khánh' }}">
+          <img src="{{ $authorUser?->avatar_url ?? $currentUser?->avatar_url ?? asset('assets/images/admin-khanh.jpg') }}" alt="{{ $authorUser?->name ?? 'Admin Khánh' }}" onerror="this.onerror=null; this.src='{{ asset('assets/images/admin-khanh.jpg') }}';">
         </div>
         <div class="median-author-name">
           <span>{{ $authorUser?->name ?? 'Bùi Viết Khánh' }}</span>
