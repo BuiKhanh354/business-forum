@@ -18,3 +18,6 @@ yarn-error.log
 /.phpunit.cache
 *.log
 /tests
+*.webm
+record_demo.cjs
+/public/demo-video/
